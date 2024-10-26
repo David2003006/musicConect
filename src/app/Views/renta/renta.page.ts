@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { cart } from 'ionicons/icons';
 import { CarritoComponent } from '../carrito/carrito.component';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-renta',
@@ -25,7 +26,7 @@ import { CarritoComponent } from '../carrito/carrito.component';
 })
 export class RentaPage implements OnInit {
 
-  constructor(private eRef: ElementRef) { 
+  constructor(private eRef: ElementRef, private navCtrl: NavController) { 
 
     addIcons({ cart });
 
@@ -33,6 +34,8 @@ export class RentaPage implements OnInit {
 
   ngOnInit() {
   }
+
+  idProducto: string = "EsteEsElIDDelProducto";
 
   estadoCarrito = false;
 
@@ -50,6 +53,12 @@ export class RentaPage implements OnInit {
       this.estadoCarrito = false;
     
     }
+
+  }
+
+  irDetalleRenta(id: string) {
+
+    this.navCtrl.navigateForward("renta/" + id, { animated: false });
 
   }
 

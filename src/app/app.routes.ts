@@ -49,6 +49,10 @@ export const routes: Routes = [
   {
     path: 'compra/:id',
     loadComponent: () => import('./Views/detalle-compra/detalle-compra.page').then( m => m.DetalleCompraPage)
+  },
+  {
+    path: 'renta/:id',
+    loadComponent: () => import('./Views/detalle-renta/detalle-renta.page').then( m => m.DetalleRentaPage)
   }
 
 
