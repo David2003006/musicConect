@@ -45,7 +45,12 @@ export const routes: Routes = [
   {
     path: 'lista-carrito',
     loadComponent: () => import('./Views/lista-carrito/lista-carrito.page').then( m => m.ListaCarritoPage)
+  },
+  {
+    path: 'detalle-compra',
+    loadComponent: () => import('./Views/detalle-compra/detalle-compra.page').then( m => m.DetalleCompraPage)
   }
+
 
 
 
