@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { cart } from 'ionicons/icons';
 import { CarritoComponent } from '../carrito/carrito.component';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-compra',
@@ -26,7 +27,7 @@ import { CarritoComponent } from '../carrito/carrito.component';
 })
 export class CompraPage implements OnInit {
 
-  constructor(private eRef: ElementRef) { 
+  constructor(private eRef: ElementRef, private navCtrl: NavController) { 
 
     addIcons({ cart });
 
@@ -34,6 +35,8 @@ export class CompraPage implements OnInit {
 
   ngOnInit() {
   }
+
+  idProducto: string = "EsteEsElIDDelProducto";
 
   estadoCarrito = false;
 
@@ -51,6 +54,12 @@ export class CompraPage implements OnInit {
       this.estadoCarrito = false;
     
     }
+
+  }
+
+  irDetalleCompra(id: string) {
+
+    this.navCtrl.navigateForward("compra/" + id, { animated: false });
 
   }
 
