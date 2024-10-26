@@ -21,7 +21,7 @@ export interface Rol {
 
 export interface Usuario {
 
-    UsuarioID: string,
+    Usuarioid: string,
     Nombre: string,
     Correo: string,
     Contrasena: string,
