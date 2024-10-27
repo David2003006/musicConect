@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { addCircleOutline, cart } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { CarritoComponent } from '../carrito/carrito.component';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cursos',
@@ -25,7 +26,7 @@ import { CarritoComponent } from '../carrito/carrito.component';
 })
 export class CursosPage implements OnInit {
 
-  constructor(private eRef: ElementRef) {
+  constructor(private eRef: ElementRef, private navCtrl: NavController) {
 
     addIcons({ addCircleOutline, cart });
 
@@ -34,6 +35,8 @@ export class CursosPage implements OnInit {
   ngOnInit() {
   }
 
+  idCurso: string = "EsteEsElIDDelCurso";
+  
   estadoCarrito = false;
 
   cambiarEstadoCarrito() {
@@ -50,6 +53,12 @@ export class CursosPage implements OnInit {
       this.estadoCarrito = false;
     
     }
+
+  }
+
+  irDetalleCurso(id: string) {
+
+    this.navCtrl.navigateForward("curso/" + id, { animated: false });
 
   }
 

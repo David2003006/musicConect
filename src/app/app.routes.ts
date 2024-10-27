@@ -53,6 +53,10 @@ export const routes: Routes = [
   {
     path: 'renta/:id',
     loadComponent: () => import('./Views/detalle-renta/detalle-renta.page').then( m => m.DetalleRentaPage)
+  },
+  {
+    path: 'curso/:id',
+    loadComponent: () => import('./Views/detalle-curso/detalle-curso.page').then( m => m.DetalleCursoPage)
   }
 
 

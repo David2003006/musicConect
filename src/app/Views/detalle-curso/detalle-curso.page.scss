@@ -1,0 +1,131 @@
+app-header {
+
+    position: relative;
+    width: 100%;
+    z-index: 10;
+    height: 8%;
+    top: 0%;
+
+}
+
+ion-content {
+
+    --background: #FFE1FF;
+
+}
+
+p {
+
+    margin-bottom: 0%;
+
+}
+
+.content {
+
+    background-color: white;
+    min-height: max-content;
+    border-radius: 1vh;
+    position: relative;
+    color: black;
+    height: 85%;
+    width: 98%;
+    left: 1%;
+    top: 12%;
+
+}
+
+.resumenCurso {
+
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    flex-wrap: nowrap;
+    display: flex;
+    height: 30%;
+    width: 98%;
+    left: 1%;
+    top: 2%;
+    
+}
+
+.imagenCurso {
+
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 40%;
+
+}
+
+#imagen {
+
+    object-fit: cover;
+    height: 100%;
+
+}
+
+.resumen {
+
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 60%;
+
+}
+
+#titulo {
+
+    font-weight: bold;
+    font-size: 4.5vh;
+
+}
+
+#precio {
+
+    font-size: 4vh;
+
+}
+
+#agregarCarrito {
+
+    background-color: green;
+    position: relative;
+    color: white;
+    width: 98%;
+
+}
+
+.contenidoCurso {
+
+    position: relative;
+    height: 66%;
+    width: 98%;
+    left: 1%;
+    top: 2%;
+
+}
+
+#tituloRequisitos, #tituloDescripcion, #tituloContenido {
+
+    position: relative;
+    font-weight: bold;
+    font-size: 4vh;
+    width: 99%;
+    top: 5%;
+
+}
+
+.listaRequisitos, .listaRequisitos > li, #descripcion, #contenido {
+
+    position: relative;
+    font-size: 3vh;
+    width: 99%;
+    top: 5%;
+
+}
