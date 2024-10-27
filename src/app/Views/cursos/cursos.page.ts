@@ -58,7 +58,7 @@ export class CursosPage implements OnInit {
 
   irDetalleCurso(id: string) {
 
-    this.navCtrl.navigateForward("curso/" + id, { animated: false });
+    this.navCtrl.navigateForward("curso/DetalleCurso/" + id, { animated: false });
 
   }
 

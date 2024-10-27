@@ -55,8 +55,12 @@ export const routes: Routes = [
     loadComponent: () => import('./Views/detalle-renta/detalle-renta.page').then( m => m.DetalleRentaPage)
   },
   {
-    path: 'curso/:id',
+    path: 'curso/DetalleCurso/:id',
     loadComponent: () => import('./Views/detalle-curso/detalle-curso.page').then( m => m.DetalleCursoPage)
+  },
+  {
+    path: 'curso/:id',
+    loadComponent: () => import('./Views/contenido-curso/contenido-curso.page').then( m => m.ContenidoCursoPage)
   }
 
 
