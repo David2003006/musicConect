@@ -71,3 +71,8 @@ export interface CarritoCompra {
     MetodoPagoID: string
 
 }
+
+export interface Login{
+    correo : string,
+    contrasena: string
+}

@@ -12,12 +12,12 @@
 
         <div id="nombreUsuario" class="input">
           <label for="nombreUsuario" class="form-label">Nombre Usuario</label>
-          <input type="text" class="form-control" placeholder="Nombre Usuario" aria-label="Nombre Usuario" aria-describedby="basic-addon1">
+          <input type="text"  class="form-control" placeholder="Nombre Usuario" aria-label="Nombre Usuario" aria-describedby="basic-addon1" [(ngModel)]="createUser.Nombre">
         </div>
 
         <div id="correo" class="input">
           <label for="correo" class="form-label">Correo Electronico</label>
-          <input type="text" class="form-control" placeholder="Correo Electronico" aria-label="Correo Electronico" aria-describedby="basic-addon1">
+          <input type="text"  class="form-control" placeholder="Correo Electronico" aria-label="Correo Electronico" aria-describedby="basic-addon1" [(ngModel)]="createUser.Correo">
         </div>
 
       </div>
@@ -26,7 +26,7 @@
 
         <div id="contraseña" class="input">
           <label for="contraseña" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
+          <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" [(ngModel)]="createUser.Contrasena">
         </div>
 
         <div id="repetirContraseña" class="input">
@@ -36,7 +36,7 @@
 
       </div>
 
-      <button type="button" class="btn" id="crearCuenta" (click)="irRuta('inicio')">Ingresar</button>
+      <button type="button" class="btn" id="crearCuenta" (click)="registerUser(createUser)">Ingresar</button>
 
       <p id="conCuenta">¿Ya tienes una cuenta? <span id="iniciarSesion" (click)="irRuta('log-in')">Inicia sesion</span></p>
   
