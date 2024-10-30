@@ -54,12 +54,12 @@ export interface CursoVideo {
 }
 
 export interface Producto {
-
     ProductoID: string,
     Nombre: string,
     Precio: number,
     CategoriaID: string
-
+    RentaID: string
+    imagen :string
 }
 
 export interface CarritoCompra {
@@ -75,4 +75,10 @@ export interface CarritoCompra {
 export interface Login{
     correo : string,
     contrasena: string
+}
+
+export interface TipoRenta
+{
+    RentaID: string,
+    NombreTipo: string
 }
