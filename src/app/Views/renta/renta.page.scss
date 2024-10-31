@@ -21,6 +21,15 @@ ion-content {
 
 }
 
+$icon-color: #3880ff;
+
+.iconoAgregar {
+  font-size: 24px; // Ajusta el tamaño según sea necesario
+  color: $icon-color; // Usa la variable de color
+  cursor: pointer; // Cambia el cursor para indicar que es clickeable
+  margin-left: 10px; // Añade espacio a la izquierda
+}
+
 .tituloPagina > #titulo {
 
     font-weight: bolder;

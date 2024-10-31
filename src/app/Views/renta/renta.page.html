@@ -3,9 +3,7 @@
 <ion-content>
   
   <div class="tituloPagina">
-
     <p id="titulo">RENTA</p>
-
   </div>
 
   <div class="content">
@@ -26,20 +24,22 @@
         </select>
       </div>
       
-      <div  id="selectTipo" class="input lg-3">
+      <div id="selectTipo" class="input lg-3">
         <label for="selectTipo" class="form-label">Tipo Renta</label>
         <select class="form-select" aria-label="Tipo Renta" label="Tipo Renta" (change)="filtrarPorCategoria()" [(ngModel)]="tiporentaSeleccionada">
           <option selected value="Todos">Todos</option>
-          <option *ngFor=" let tipo of  tipoRenta" [value]="tipo.RentaID">{{tipo.NombreTipo}}</option>
+          <option *ngFor=" let tipo of tipoRenta" [value]="tipo.RentaID">{{ tipo.NombreTipo }}</option>
         </select>
       </div>
       
       <ion-icon name="cart" id="carritoIcon" (click)="cambiarEstadoCarrito()"></ion-icon>
       
     </div>
+    
     <div id="popoverCarrito" [ngClass]="{'mostrar': estadoCarrito, 'ocultar': !estadoCarrito}">
       <app-carrito></app-carrito>
     </div>
+    
     <div class="listaProductos">
       <div *ngFor="let producto of productos" class="card datosProducto">
         <div class="rentaMensual">
@@ -49,6 +49,8 @@
         <div class="card-body">
           <p id="nombreProducto">{{ producto.Nombre }}</p>
           <p id="precioProducto">${{ producto.Precio | number: '1.2-2' }} por mes</p>
+          <!-- Ícono para agregar al carrito -->
+          <ion-icon name="add-circle" class="iconoAgregar" (click)="agregarProductoAlCarrito(producto)" title="Añadir al carrito"></ion-icon>
         </div>
       </div>
     </div>

@@ -1,176 +1,63 @@
 <app-header></app-header>
 
 <ion-content>
-  
   <div class="tituloPagina">
-
     <p id="titulo">Lista del Carrito</p>
-
   </div>
 
   <div class="content">
-
     <div class="table-responsive" id="listaPedidos">
-
       <table class="table caption-top table-hover table-striped align-middle">
         <thead>
           <tr>
-            <th scope="col">Datos Producto</th>
+            <th scope="col">Datos Producto/Curso</th>
             <th scope="col">Precio Total</th>
             <th scope="col">Tipo</th>
             <th scope="col">Eliminar</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <!-- Recorremos cada item en el carrito -->
+          <tr *ngFor="let item of carrito; let i = index">
             <td>
               <div class="row">
                 <div class="col-2">
-                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
+                  <!-- Imagen dinámica -->
+                  <img 
+                    [src]="(detallesItems$ | async)?.[i]?.imagen || 'https://ionicframework.com/docs/img/demos/avatar.svg'" 
+                    alt="ProductoCarrito" id="imagenCarrito"
+                  />
                 </div>
                 <div class="col-10 columnaDatosProducto">
-                  <p id="nombreCarrito">Nombre Producto</p>
-                  <p id="precioUnitarioCarrito">$00000.00</p>
+                  <!-- Nombre y precio del producto o curso -->
+                  <p id="nombreCarrito">{{ (detallesItems$ | async)?.[i]?.nombre || 'Nombre Producto' }}</p>
+                  <p id="precioUnitarioCarrito">${{ (detallesItems$ | async)?.[i]?.precio | number: '1.2-2' }}</p>
                 </div>
               </div>
             </td>
             <td>
-              <p id="precioFinalCarrito">$00000.00</p>
+              <p id="precioFinalCarrito">${{ (detallesItems$ | async)?.[i]?.precio | number: '1.2-2' }}</p>
             </td>
             <td>
               <div class="tipoCarrito">
-                <p>C</p>
-                <p>x1000</p>
-              </div>      
-            </td>
-            <td>
-              <div class="columnaEliminar">
-                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="row">
-                <div class="col-2">
-                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
-                </div>
-                <div class="col-10 columnaDatosProducto">
-                  <p id="nombreCarrito">Nombre Producto</p>
-                  <p id="precioUnitarioCarrito">$00000.00</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p id="precioFinalCarrito">$00000.00</p>
-            </td>
-            <td>
-              <div class="tipoCarrito">
-                <p id="tipoCarrito">R</p>
-                <p id="tiempoRenta">M</p>
+                <!-- Tipo de producto -->
+                <p id="tipoCarrito">{{ (detallesItems$ | async)?.[i]?.tipo || 'Tipo' }}</p>
               </div>
             </td>
             <td>
               <div class="columnaEliminar">
-                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
+                <!-- Eliminar producto con icono de basura -->
+                <ion-icon name="trash" id="eliminarProducto" (click)="eliminarProducto(item)"></ion-icon>
               </div>
             </td>
           </tr>
-
-          <tr>
-            <td>
-              <div class="row">
-                <div class="col-2">
-                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
-                </div>
-                <div class="col-10 columnaDatosProducto">
-                  <p id="nombreCarrito">Nombre Producto</p>
-                  <p id="precioUnitarioCarrito">$00000.00</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p id="precioFinalCarrito">$00000.00</p>
-            </td>
-            <td>
-              <div class="tipoCarrito">
-                <p id="tipoCarrito">R</p>
-                <p id="tiempoRenta">A</p>
-              </div>
-            </td>
-            <td>
-              <div class="columnaEliminar">
-                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="row">
-                <div class="col-2">
-                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
-                </div>
-                <div class="col-10 columnaDatosProducto">
-                  <p id="nombreCarrito">Nombre Producto</p>
-                  <p id="precioUnitarioCarrito">$00000.00</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p id="precioFinalCarrito">$00000.00</p>
-            </td>
-            <td>
-              <div class="tipoCarrito">
-                <p id="tipoCarrito">R</p>
-                <p id="tiempoRenta">S</p>
-              </div>
-            </td>
-            <td>
-              <div class="columnaEliminar">
-                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
-              </div>
-            </td>
-          </tr>
-
-          <tr>
-            <td>
-              <div class="row">
-                <div class="col-2">
-                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
-                </div>
-                <div class="col-10 columnaDatosProducto">
-                  <p id="nombreCarrito">Nombre Producto</p>
-                  <p id="precioUnitarioCarrito">$00000.00</p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p id="precioFinalCarrito">$00000.00</p>
-            </td>
-            <td>
-              <div class="tipoCarrito">
-                <p id="tipoCarrito">CO</p>
-              </div>
-            </td>
-            <td>
-              <div class="columnaEliminar">
-                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
-              </div>
-            </td>
-          </tr>
-
         </tbody>
       </table>
-
     </div>
 
     <div class="resumenCarrito">
-      <button type="button" class="btn" id="botonComprar">Comprar Carrito</button>
-      <p class="totalCarrito">Total: <span id="totalFinal">$00000.00</span></p>
+      <button type="button" class="btn" id="botonComprar" (click)="comprarCarrito()">Comprar Carrito</button>
+      <p class="totalCarrito">Total: <span id="totalFinal">${{ totalCarrito | number: '1.2-2' }}</span></p>
     </div>
-
   </div>
-
 </ion-content>

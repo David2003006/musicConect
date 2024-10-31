@@ -5,9 +5,10 @@ import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { cart } from 'ionicons/icons';
 import { CarritoComponent } from '../carrito/carrito.component';
-import { Producto } from 'src/app/Models/Interfaces';
+import { CarritoCompra, Producto } from 'src/app/Models/Interfaces';
 import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
 import { FormsModule } from '@angular/forms';
+import { ListaCarritoServicesService } from 'src/app/Services/lista-carrito.services.service';
 
 @Component({
   selector: 'app-renta',
@@ -37,7 +38,9 @@ export class RentaPage implements OnInit {
   tiporentaSeleccionada: string = 'Todos';
   nombreBusqueda: string = '';
 
-  constructor(private eRef: ElementRef, private fireStoreServices: FirestoreDatabaseService) { 
+  constructor(private eRef: ElementRef, 
+    private fireStoreServices: FirestoreDatabaseService,
+    private carrito : ListaCarritoServicesService)   { 
 
     addIcons({ cart });
 
@@ -59,6 +62,11 @@ export class RentaPage implements OnInit {
     this.fireStoreServices.getCollectionChanges<Producto>('Producto').subscribe((data) => {
       this.productos = data;
     });
+  }
+
+  agregarProductoAlCarrito(producto: any) {
+    this.carrito.agregarProductoAlCarrito(producto); // Llama al método del servicio
+    // Puedes también mostrar un mensaje de éxito o feedback al usuario si lo deseas
   }
 
   estadoCarrito = false;
