@@ -9,6 +9,8 @@ $color-secundario: #E4B1F0;
     height: 100%;
     width: 50%;
 
+ 
+
 }
 
 .contenidoIzquierda {
@@ -18,6 +20,9 @@ $color-secundario: #E4B1F0;
     flex-direction: column;
     flex-wrap: nowrap;
     z-index: 2;
+    height: 100%;
+    width: 50%;
+   
 
 }
 
@@ -34,14 +39,35 @@ $color-secundario: #E4B1F0;
 
     margin-bottom: 0%;
     font-weight: 600;
-    font-size: 10vh;
+    font-size: 15vh;
     margin-top: 0%;
+
+    @media(max-width: 480px){ //Para dispositivos moviles
+
+        font-size: 3.5vh;
+
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) { //Para Tablets
+        font-size: 4.3vh;
+
+ }
 
 }
 
 #descripcion {
 
-    font-size: 6vh;
+    font-size: 8vh;
+
+    @media(max-width: 480px){ //Para dispositivos moviles
+
+        font-size: 3vh;
+
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) { //Para Tablets
+    font-size: 4.3vh
+ }
 
 }
 
@@ -50,6 +76,16 @@ $color-secundario: #E4B1F0;
     --background: #433878;
     font-size: 5vh;
     color: white;
+
+    @media(max-width: 480px){ //Para dispositivos moviles
+
+        font-size: 2vh;
+
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) { //Para Tablets
+    font-size: 3vh;
+ }
 
 }
 
@@ -120,4 +156,5 @@ $color-secundario: #E4B1F0;
     width: 15%;
     left: 0%;
 
-}
+} 
+
