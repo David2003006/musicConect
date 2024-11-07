@@ -20,3 +20,23 @@ export interface Renta{
     Nombre: string,
     RentaID: string
 }
+
+export interface Carrito{
+    idProducto : string,
+    Nombre : string,
+    Precio : number,
+    Tipo : string ,
+    Total: number,
+    imagen: string
+}
+
+export interface Curso{
+    CursoID: string,
+    Nombre: string,
+    Precio: string,
+    UsuarioID: string,
+    Requisitos: string,
+    Descripcion: string,
+    Contenido: string,
+    imagen: string
+}
