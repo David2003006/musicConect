@@ -11,6 +11,7 @@ export interface Producto{
     Precio: number,
     ProductoID: string,
     descripcion: string,
+    Compra: boolean,
     RentaID: string,
     imagen: string
 }
@@ -39,4 +40,10 @@ export interface Curso{
     Descripcion: string,
     Contenido: string,
     imagen: string
+}
+
+export interface Video{
+    VideoID: string,
+    Nombre: string,
+    URL: string
 }

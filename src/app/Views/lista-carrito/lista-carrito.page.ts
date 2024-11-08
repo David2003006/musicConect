@@ -41,7 +41,7 @@ export class ListaCarritoPage implements OnInit {
       const idProducto = params['idProducto'];
       const tipoRenta = params['tipoRenta'];
       const plazo = params['plazo'];
-
+      const cantidad = params['cantidad'];
       if (idProducto && tipoRenta && plazo) {
         this.agregarAlCarrito(idProducto, tipoRenta, plazo);
       }
@@ -56,6 +56,7 @@ export class ListaCarritoPage implements OnInit {
 
   agregarAlCarrito(idProducto: string, tipoRenta: string, plazo: number) {
     this.fire.getDoc<Producto>('Producto', idProducto).subscribe(producto => {
+      
       if (producto) {
         const productoCarrito: Carrito = {
           idProducto: producto.ProductoID,
@@ -90,4 +91,6 @@ export class ListaCarritoPage implements OnInit {
     // Actualizar el total
     this.totalCarrito = this.carritoService.calcularTotal();
   }
+
+  
 }
