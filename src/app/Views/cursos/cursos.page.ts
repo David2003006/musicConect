@@ -9,6 +9,7 @@ import { CarritoComponent } from '../carrito/carrito.component';
 import { NavController } from '@ionic/angular';
 import { Curso } from 'src/app/Models/Interfaces';
 import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cursos',
@@ -25,7 +26,8 @@ import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.se
     IonCard,
     IonIcon,
     CarritoComponent,
-    IonPopover
+    IonPopover,
+    FormsModule
   ]
 })
 export class CursosPage implements OnInit {

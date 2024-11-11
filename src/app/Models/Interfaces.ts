@@ -12,6 +12,7 @@ export interface Producto{
     ProductoID: string,
     descripcion: string,
     Compra: boolean,
+    cantidad: number,
     RentaID: string,
     imagen: string
 }

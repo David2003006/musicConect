@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { cart } from 'ionicons/icons';
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     IonContent,
+    //IonicModule,
     HeaderComponent,
     IonInput,
     IonSelect, IonSelectOption,
@@ -32,6 +34,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class CompraPage implements OnInit {
   productos: Producto[] = [];
+  productosEnCarrito: any [] = [];
 
   constructor(private eRef: ElementRef, private navCtrl: NavController, private fire: FirestoreDatabaseService) { 
     addIcons({ cart });
@@ -39,6 +42,7 @@ export class CompraPage implements OnInit {
 
   ngOnInit() {
     this.obtenerProductos();
+    this.productosEnCarrito = JSON.parse(localStorage.getItem('carrito') || '[]');
   }
 
   obtenerProductos() {

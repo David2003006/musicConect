@@ -3,49 +3,156 @@
 <ion-content>
   
   <div class="tituloPagina">
+
     <p id="titulo">CURSOS</p>
+
   </div>
 
   <div class="content">
 
     <div class="listaCursos">
-      <!-- Iteramos sobre el array cursos y mostramos cada uno -->
-      <div *ngFor="let curso of cursos" class="card datosCurso" (click)="irDetalleCurso(curso.CursoID)">
+
+      <div class="card datosCurso" (click)="irDetalleCurso(idCurso)">
         <div class="row">
           <div class="col-5 columnaNombre">
-            <p id="nombreCurso">{{curso.Nombre}}</p>
+            <p id="nombreCurso">NOMBRE CURSO</p>
           </div>
           <div class="col-2 columnaImagen">
-            <img *ngIf="curso.imagen" [src]="curso.imagen" alt="Curso" id="imagenCurso"/>
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
           </div>
           <div class="col-5 columnaPrecio">
-            <!-- Mostramos el precio formateado -->
-            <p id="precioCurso">{{getPrecioFormateado(curso?.Precio || '0') | currency}}</p>
+            <p id="precioCurso">$00000.00</p>
             <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="filtros">
-
-      <div id="popoverCarrito" [ngClass]="{'mostrar': estadoCarrito, 'ocultar': !estadoCarrito}">
-        <app-carrito></app-carrito>
+      <div class="card datosCurso">
+        <div class="row">
+          <div class="col-5 columnaNombre">
+            <p id="nombreCurso">NOMBRE CURSO</p>
+          </div>
+          <div class="col-2 columnaImagen">
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
+          </div>
+          <div class="col-5 columnaPrecio">
+            <p id="precioCurso">$00000.00</p>
+            <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
+          </div>
+        </div>
       </div>
 
-      <ion-icon name="cart" id="carritoIcon" (click)="cambiarEstadoCarrito()"></ion-icon>
-      
-      <div id="inputProducto" class="input lg-3">
-        <label for="inputProducto" class="form-label">Busqueda</label>
-        <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1">
+      <div class="card datosCurso">
+        <div class="row">
+          <div class="col-5 columnaNombre">
+            <p id="nombreCurso">NOMBRE CURSO</p>
+          </div>
+          <div class="col-2 columnaImagen">
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
+          </div>
+          <div class="col-5 columnaPrecio">
+            <p id="precioCurso">$00000.00</p>
+            <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
+          </div>
+        </div>
       </div>
 
-      <div id="selectCategoria" class="input lg-3">
-        <label for="selectCategoria" class="form-label">Categoria</label>
-        <select class="form-select" aria-label="Categoria" label="Categoria">
-          <option selected value="Todos">Todos</option>
-          <option value="opcion1">Opcion 1</option>
-        </select>
+      <div class="card datosCurso">
+        <div class="row">
+          <div class="col-5 columnaNombre">
+            <p id="nombreCurso">NOMBRE CURSO</p>
+          </div>
+          <div class="col-2 columnaImagen">
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
+          </div>
+          <div class="col-5 columnaPrecio">
+            <p id="precioCurso">$00000.00</p>
+            <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="card datosCurso">
+        <div class="row">
+          <div class="col-5 columnaNombre">
+            <p id="nombreCurso">NOMBRE CURSO</p>
+          </div>
+          <div class="col-2 columnaImagen">
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
+          </div>
+          <div class="col-5 columnaPrecio">
+            <p id="precioCurso">$00000.00</p>
+            <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="card datosCurso">
+        <div class="row">
+          <div class="col-5 columnaNombre">
+            <p id="nombreCurso">NOMBRE CURSO</p>
+          </div>
+          <div class="col-2 columnaImagen">
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
+          </div>
+          <div class="col-5 columnaPrecio">
+            <p id="precioCurso">$00000.00</p>
+            <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="card datosCurso">
+        <div class="row">
+          <div class="col-5 columnaNombre">
+            <p id="nombreCurso">NOMBRE CURSO</p>
+          </div>
+          <div class="col-2 columnaImagen">
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
+          </div>
+          <div class="col-5 columnaPrecio">
+            <p id="precioCurso">$00000.00</p>
+            <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="card datosCurso">
+        <div class="row">
+          <div class="col-5 columnaNombre">
+            <p id="nombreCurso">NOMBRE CURSO</p>
+          </div>
+          <div class="col-2 columnaImagen">
+            <img alt="Curso" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCurso"/>
+          </div>
+          <div class="col-5 columnaPrecio">
+            <p id="precioCurso">$00000.00</p>
+            <ion-icon name="add-circle-outline" id="iconoAdd"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="filtros">
+  
+        <div id="popoverCarrito" [ngClass]="{'mostrar': estadoCarrito, 'ocultar': !estadoCarrito}">
+          <app-carrito></app-carrito>
+        </div>
+
+        <ion-icon name="cart" id="carritoIcon" (click)="cambiarEstadoCarrito()"></ion-icon>
+        
+        <div id="inputProducto" class="input lg-3">
+          <label for="inputProducto" class="form-label">Busqueda</label>
+          <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1">
+        </div>
+  
+        <div id="selectCategoria" class="input lg-3">
+          <label for="selectCategoria" class="form-label">Categoria</label>
+          <select class="form-select" aria-label="Categoria" label="Categoria">
+            <option selected value="Todos">Todos</option>
+            <option value="opcion1">Opcion 1</option>
+          </select>
+        </div>
+    
       </div>
 
     </div>
