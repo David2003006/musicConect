@@ -48,3 +48,8 @@ export interface Video{
     Nombre: string,
     URL: string
 }
+
+export interface Categoria{
+    CategoriaID: string,
+    Nombre: string
+}

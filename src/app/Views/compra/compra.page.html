@@ -11,14 +11,17 @@
     <div class="filtros">
       <div id="inputProducto" class="input lg-3">
         <label for="inputProducto" class="form-label">Busqueda</label>
-        <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1" [(ngModel)]="busqueda" (ngModelChange)="filtrarProductos()">
       </div>
 
       <div id="selectCategoria" class="input lg-3">
-        <label for="selectCategoria" class="form-label">Categoria</label>
-        <select class="form-select" aria-label="Categoria" label="Categoria">
+        <label for="inputProducto" class="form-label">Categoria</label>
+        <select class="form-select" aria-label="Categoria" [(ngModel)]="categoriaSeleccionada" (change)="filtrarProductos()">
           <option selected value="Todos">Todos</option>
-          <option value="opcion1">Opcion 1</option>
+          <option value="Electronicos">Electronicos</option>
+          <option value="Percusion">Percusion</option>
+          <option value="Viento">Viento</option>
+          <option value="Cuerda">Cuerda</option>
         </select>
       </div>
 
@@ -30,12 +33,17 @@
     </div>
 
     <div class="listaProductos">
-      <!-- Itera sobre los productos filtrados donde Compra es true -->
-      <div *ngFor="let producto of productos" class="card datosProducto" (click)="irDetalleCompra(producto.ProductoID)">
-        <img alt="Producto" [src]="producto.imagen || 'https://ionicframework.com/docs/img/demos/avatar.svg'" id="imagenProducto"/>
+      <div 
+        class="card datosProducto" 
+        *ngFor="let producto of productosFiltrados" 
+        (click)="irDetalleCompra(producto.ProductoID)">
+        <div class="rentaMensual">
+          <p id="tipoProducto">{{ producto.RentaID }}</p>
+        </div>
+        <img [src]="producto.imagen" alt="Producto" id="imagenProducto"/>
         <div class="card-body">
           <p id="nombreProducto">{{ producto.Nombre }}</p>
-          <p id="precioProducto">{{ producto.Precio | currency }}</p>
+          <p id="precioProducto">${{ producto.Precio }} por mes</p>
         </div>
       </div>
     </div>

@@ -12,22 +12,27 @@
 
       <div id="inputProducto" class="input lg-3">
         <label for="inputProducto" class="form-label">Busqueda</label>
-        <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1" [(ngModel)]="busquedaTermino" (input)="obtenerCategorias()">
       </div>
 
       <div id="selectCategoria" class="input lg-3">
         <label for="inputProducto" class="form-label">Categoria</label>
-        <select class="form-select" aria-label="Categoria" label="Categoria">
+        <select class="form-select" aria-label="Categoria" [(ngModel)]="categoriaSeleccionada" (change)="filtrarProductos()">
           <option selected value="Todos">Todos</option>
-          <option value="opcion1">Opcion 1</option>
+          <option value="Electronicos">Electronicos</option>
+          <option value="Percusion">Percusion</option>
+          <option value="Viento">Viento</option>
+          <option value="Cuerda">Cuerda</option>
         </select>
       </div>
       
       <div id="selectTipo" class="input lg-3">
         <label for="selectTipo" class="form-label">Tipo Renta</label>
-        <select class="form-select" aria-label="Tipo Renta" label="Tipo Renta">
+        <select class="form-select" aria-label="Tipo Renta" [(ngModel)]="tipoRentaSeleccionado" (change)="filtrarProductos()">
           <option selected value="Todos">Todos</option>
-          <option value="opcion1">Opcion 1</option>
+          <option value="S">Semanal</option>
+          <option value="A">Anual</option>
+          <option value="M">Mensual</option>
         </select>
       </div>
       <ion-icon name="cart" id="carritoIcon" (click)="cambiarEstadoCarrito()"></ion-icon>
@@ -40,7 +45,7 @@
     <div class="listaProductos">
       <div 
         class="card datosProducto" 
-        *ngFor="let producto of productos" 
+        *ngFor="let producto of productosFiltrados" 
         (click)="irDetalleRenta(producto.ProductoID)">
         <div class="rentaMensual">
           <p id="tipoProducto">{{ producto.RentaID }}</p>
