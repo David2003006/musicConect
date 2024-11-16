@@ -78,9 +78,13 @@ ion-content {
     min-height: max-content;
     padding-bottom: 2%;
     border-radius: 1%;
-    height: 78%;
+    height:max-content;
     width: 98%;
     left: 1%;
+    margin-top:10%;
+    @media (min-width: 1025px){
+    margin-top:1%;
+    }
     
 }
 
@@ -99,8 +103,15 @@ ion-content {
     font-weight: bolder;
     position: relative;
     margin-bottom: 0%;
-    font-size: 3.5vh;
+    font-size: 2.5vh;
     overflow: hidden;
+    @media(max-width: 480px){ 
+     font-size: 1.5vh;
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 1.5vh;
+    }
 
 }
 
@@ -111,6 +122,18 @@ ion-content {
     position: relative;
     overflow: hidden;
     font-size: 3vh;
+
+    @media(max-width: 480px){ 
+        margin-right: 1%;
+        font-size: 2.5vh;
+        margin-top: 2%; 
+
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -133,7 +156,7 @@ ion-content {
 
 .datosProducto > .card-body {
 
-    padding: 0%;
+    padding: 2%;
    
 
 }
@@ -154,6 +177,10 @@ ion-content {
     width: 94%;
     left: 3%;
     top: 2%;
+    bottom:4.5vh;
+    padding-top:5vh;
+
+    
 
 }
 
@@ -165,6 +192,7 @@ ion-content {
     
 
 }
+
 
 #selectCategoria {
 
@@ -241,6 +269,15 @@ ion-content {
 
     transform: scaleY(1);
     opacity: 100;
+
+    @media(max-width: 480px){ 
+        width: 30vh;
+        left: 30%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    width: 45vh;
+    left: 37%;
+ }
 
 }
 
