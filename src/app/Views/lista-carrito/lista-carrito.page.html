@@ -1,9 +1,11 @@
 <app-header></app-header>
 
 <ion-content>
-
+  
   <div class="tituloPagina">
+
     <p id="titulo">Lista del Carrito</p>
+
   </div>
 
   <div class="content">
@@ -20,35 +22,141 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Usamos *ngFor para iterar sobre los productosEnCarrito -->
-          <tr *ngFor="let producto of productosEnCarrito">
+          <tr>
             <td>
               <div class="row">
                 <div class="col-2">
-                  <!-- Imagen del producto -->
-                  <img alt="ProductoCarrito" [src]="producto.imagen" id="imagenCarrito"/>
+                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
                 </div>
                 <div class="col-10 columnaDatosProducto">
-                  <!-- Nombre y precio unitario del producto -->
-                  <p id="nombreCarrito">{{ producto.Nombre }}</p>
-                  <p id="precioUnitarioCarrito">${{ producto.Precio }}</p>
+                  <p id="nombreCarrito">Nombre Producto</p>
+                  <p id="precioUnitarioCarrito">$00000.00</p>
                 </div>
               </div>
             </td>
             <td>
-              <!-- Precio total calculado -->
-              <p id="precioFinalCarrito">${{ producto.Total }}</p>
+              <p id="precioFinalCarrito">$00000.00</p>
             </td>
             <td>
               <div class="tipoCarrito">
-                <!-- Tipo de renta -->
-                <p>{{ producto.Tipo }}</p>
+                <p>C</p>
+                <p>x1000</p>
+              </div>      
+            </td>
+            <td>
+              <div class="columnaEliminar">
+                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col-2">
+                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
+                </div>
+                <div class="col-10 columnaDatosProducto">
+                  <p id="nombreCarrito">Nombre Producto</p>
+                  <p id="precioUnitarioCarrito">$00000.00</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p id="precioFinalCarrito">$00000.00</p>
+            </td>
+            <td>
+              <div class="tipoCarrito">
+                <p id="tipoCarrito">R</p>
+                <p id="tiempoRenta">M</p>
               </div>
             </td>
             <td>
               <div class="columnaEliminar">
-                <!-- Icono para eliminar el producto -->
-                <ion-icon name="trash" (click)="eliminarProducto(producto.idProducto)" id="eliminarProducto"></ion-icon>
+                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col-2">
+                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
+                </div>
+                <div class="col-10 columnaDatosProducto">
+                  <p id="nombreCarrito">Nombre Producto</p>
+                  <p id="precioUnitarioCarrito">$00000.00</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p id="precioFinalCarrito">$00000.00</p>
+            </td>
+            <td>
+              <div class="tipoCarrito">
+                <p id="tipoCarrito">R</p>
+                <p id="tiempoRenta">A</p>
+              </div>
+            </td>
+            <td>
+              <div class="columnaEliminar">
+                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col-2">
+                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
+                </div>
+                <div class="col-10 columnaDatosProducto">
+                  <p id="nombreCarrito">Nombre Producto</p>
+                  <p id="precioUnitarioCarrito">$00000.00</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p id="precioFinalCarrito">$00000.00</p>
+            </td>
+            <td>
+              <div class="tipoCarrito">
+                <p id="tipoCarrito">R</p>
+                <p id="tiempoRenta">S</p>
+              </div>
+            </td>
+            <td>
+              <div class="columnaEliminar">
+                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <div class="row">
+                <div class="col-2">
+                  <img alt="ProductoCarrito" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCarrito"/>    
+                </div>
+                <div class="col-10 columnaDatosProducto">
+                  <p id="nombreCarrito">Nombre Producto</p>
+                  <p id="precioUnitarioCarrito">$00000.00</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p id="precioFinalCarrito">$00000.00</p>
+            </td>
+            <td>
+              <div class="tipoCarrito">
+                <p id="tipoCarrito">CO</p>
+              </div>
+            </td>
+            <td>
+              <div class="columnaEliminar">
+                <ion-icon name="trash" id="eliminarProducto"></ion-icon>
               </div>
             </td>
           </tr>
@@ -59,9 +167,8 @@
     </div>
 
     <div class="resumenCarrito">
-      <!-- Botón de comprar y mostrar el total del carrito -->
       <button type="button" class="btn" id="botonComprar">Comprar Carrito</button>
-      <p class="totalCarrito">Total: <span id="totalFinal">${{ totalCarrito }}</span></p>
+      <p class="totalCarrito">Total: <span id="totalFinal">$00000.00</span></p>
     </div>
 
   </div>

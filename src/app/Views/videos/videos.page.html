@@ -1,45 +1,93 @@
 <app-header></app-header>
 
 <ion-content>
-  <div class="tituloPagina">
-    <p id="titulo">VIDEOS</p>
-  </div>
-
-  <div class="content">
-    <div class="filtros">
-      <div id="inputVideo" class="input lg-3">
-        <label for="inputVideo" class="form-label">Busqueda</label>
-        <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1">
+    
+    <div class="tituloPagina">
+  
+      <p id="titulo">VIDEOS</p>
+  
+    </div>
+  
+    <div class="content">
+      
+      <div class="filtros">
+  
+        <div id="inputVideo" class="input lg-3">
+          <label for="inputVideo" class="form-label">Busqueda</label>
+          <input type="text" class="form-control" placeholder="Busqueda" aria-label="Busqueda" aria-describedby="basic-addon1">
+        </div>
+  
+        <div id="selectCategoria" class="input lg-3">
+          <label for="selectCategoria" class="form-label">Categoria</label>
+          <select class="form-select" aria-label="Categoria" label="Categoria">
+            <option selected value="Todos">Todos</option>
+            <option value="opcion1">Opcion 1</option>
+          </select>
+        </div>
+  
       </div>
+  
+      <div class="listaVideos">
 
-      <div id="selectCategoria" class="input lg-3">
-        <label for="selectCategoria" class="form-label">Categoria</label>
-        <select class="form-select" aria-label="Categoria" label="Categoria">
-          <option selected value="Todos">Todos</option>
-          <option value="opcion1">Opcion 1</option>
-        </select>
+        <div class="card datosVideo" (click)="abrirReproductor('idVideo')">
+          <img alt="Video" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenVideo"/>
+          <div class="card-body">
+            <p id="tituloVideo">TITULO VIDEO</p>
+          </div>
+        </div>
+
+        <div class="card datosVideo" (click)="abrirReproductor('idVideo')">
+          <img alt="Video" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenVideo"/>
+          <div class="card-body">
+            <p id="tituloVideo">TITULO VIDEO</p>
+          </div>
+        </div>
+
+        <div class="card datosVideo" (click)="abrirReproductor('idVideo')">
+          <img alt="Video" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenVideo"/>
+          <div class="card-body">
+            <p id="tituloVideo">TITULO VIDEO</p>
+          </div>
+        </div>
+
+        <div class="card datosVideo" (click)="abrirReproductor('idVideo')">
+          <img alt="Video" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenVideo"/>
+          <div class="card-body">
+            <p id="tituloVideo">TITULO VIDEO</p>
+          </div>
+        </div>
+
+        <div class="card datosVideo" (click)="abrirReproductor('idVideo')">
+          <img alt="Video" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenVideo"/>
+          <div class="card-body">
+            <p id="tituloVideo">TITULO VIDEO</p>
+          </div>
+        </div>
+
+        <div class="card datosVideo" (click)="abrirReproductor('idVideo')">
+          <img alt="Video" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenVideo"/>
+          <div class="card-body">
+            <p id="tituloVideo">TITULO VIDEO</p>
+          </div>
+        </div>
+
       </div>
+  
     </div>
 
-    <div class="listaVideos">
-      <div class="card datosVideo" *ngFor="let video of videos" (click)="abrirReproductor(video.URL)">
-        <img alt="Video" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenVideo"/>
-        <div class="card-body">
-          <p id="tituloVideo">{{ video.Nombre }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+    <ion-modal [canDismiss]="!modalVideo" [isOpen]="modalVideo" class="reproductorVideo">
+      <ng-template>
 
-  <ion-modal [canDismiss]="!modalVideo" [isOpen]="modalVideo" class="reproductorVideo">
-    <ng-template>
-      <div class="card text-bg-dark">
-        <video [src]="rutaVideo" controls autoplay id="video"></video>
-        <div class="card-img-overlay">
-          <p id="tituloReproductor">{{ rutaVideo }}</p>
-          <ion-icon name="close" id="iconoCerrar" (click)="modalVideo = false"></ion-icon>
+        <div class="card text-bg-dark">
+          <video src="rutaVideo" controls autoplay id="video"></video>
+          <div class="card-img-overlay">
+            <p id="tituloReproductor">TITULO VIDEO</p>
+            <ion-icon name="close" id="iconoCerrar" (click)="modalVideo = false"></ion-icon>
+          </div>
         </div>
-      </div>
-    </ng-template>
-  </ion-modal>
-</ion-content>
+
+      </ng-template>
+    </ion-modal>
+  
+  </ion-content>
+  

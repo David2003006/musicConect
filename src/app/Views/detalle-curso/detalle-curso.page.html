@@ -8,19 +8,17 @@
 
       <div class="imagenCurso">
 
-        <!-- Manteniendo la estructura, mostramos la imagen del curso -->
-        <img [src]="curso?.imagen" id="imagen" />
+        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagen"/>
 
       </div>
 
       <div class="resumen">
 
-        <!-- Usamos binding de Angular para mostrar el nombre y el precio -->
-        <p id="titulo">{{ curso?.Nombre }}</p>
+        <p id="titulo">TITULO CURSO</p>
 
-        <p id="precio">{{ curso?.Precio}}</p>
+        <p id="precio">$00000.00</p>
 
-        <button type="button" class="btn" id="agregarCarrito" (click)="agregarAlCarrito()">Agregar al Carrito</button>
+        <button type="button" class="btn" id="agregarCarrito">Agregar al Carrito</button>
 
       </div>
 
@@ -31,20 +29,17 @@
       <p id="tituloRequisitos">Requisitos</p>
 
       <ul class="list-group list-group-flush listaRequisitos">
-        <li class="list-group-item" *ngFor="let requisito of requisitos">
-          {{ requisito }}
-        </li>
+        <li class="list-group-item">REQUISITO UNO</li>
+        <li class="list-group-item">REQUISITO DOS</li>
       </ul>
 
       <p id="tituloDescripcion">Descripcion breve del curso</p>
 
-      <!-- Mostramos la descripción del curso -->
-      <p id="descripcion">{{ curso?.Descripcion }}</p>
+      <p id="descripcion">TODO LO QUE LLEVARA LA DESCRIPCION</p>
 
       <p id="tituloContenido">Contenido del curso</p>
 
-      <!-- Mostramos el contenido del curso -->
-      <p id="contenido">{{ curso?.Contenido }}</p>
+      <p id="contenido">TODO LO QUE LLEVARA EL CURSO</p>
 
     </div>
     
