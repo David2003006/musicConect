@@ -1,63 +1,45 @@
 <app-header></app-header>
 
 <ion-content>
-  
   <div class="content">
-
     <div class="imagenes">
-
-      <img src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenCentral"/>
+      <img [src]="producto?.imagen" id="imagenCentral" alt="Imagen principal"/>
 
       <div class="listaImagenes">
-
-        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" class="imagenAbajo"/>
-
-        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" class="imagenAbajo"/>
-
-        <img src="https://ionicframework.com/docs/img/demos/avatar.svg" class="imagenAbajo"/>
-
+        <!-- Aquí puedes mostrar más imágenes relacionadas si están disponibles -->
+        <img [src]="producto?.imagen" class="imagenAbajo" alt="Imagen secundaria"/>
       </div>
-
     </div>
 
     <div class="datosProducto">
-
-      
-      <p id="nombre">NOMBRE PRODUCTO</p>
-      <p id="precio">$00000.00</p>
+      <p id="nombre">{{ producto?.Nombre }}</p>
+      <p id="precio">${{ producto?.Precio }}</p>
 
       <p id="tituloDescripcion">Descripcion del Producto</p>
 
       <div class="areaDescripcion">
-
         <p id="descripcion">
-          ESTA ES LA DESCRIPCION DEL PRODUCTO
+          <!-- Suponiendo que hay una propiedad de descripción en el producto -->
+          {{ producto?.descripcion || 'Descripción no disponible' }}
         </p>
-
       </div>
 
       <div class="renta">
-        
         <div id="tipoRenta" class="input">
           <label for="tipoRenta" class="form-label">Tipo Renta</label>
           <select class="form-select" aria-label="Tipo Renta" label="Tipo Renta">
-            <option selected value="predeterminado">Seleccione tipo renta</option>
-            <option value="semanal">Semanal</option>
-            <option value="mensual">Mensual</option>
+            <option [selected]="producto?.RentaID === 'S'" value="semanal">Semanal</option>
+            <option [selected]="producto?.RentaID === 'M'" value="mensual">Mensual</option>
+            <option [selected]="producto?.RentaID === 'A'" value="anual">Anual</option>
           </select>
         </div>
-  
+
         <div id="plazo" class="input">
           <label for="plazo" class="form-label">Plazo</label>
           <input type="number" class="form-control" placeholder="Plazo" aria-label="Plazo" aria-describedby="basic-addon1" value="0" min="0">
         </div>
-
       </div>
-
-      <button type="button" class="btn" id="agregarCarrito">Agregar al Carrito</button>
-
+      <button type="button" class="btn" id="agregarCarrito" (click)="agregarAlCarrito()">Agregar al Carrito</button>
     </div>
-    
   </div>
-
 </ion-content>

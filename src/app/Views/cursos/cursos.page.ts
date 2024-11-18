@@ -1,11 +1,15 @@
 import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
 import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
 import { addCircleOutline, cart } from 'ionicons/icons';
 import { addIcons } from 'ionicons';
 import { CarritoComponent } from '../carrito/carrito.component';
 import { NavController } from '@ionic/angular';
+import { Curso } from 'src/app/Models/Interfaces';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cursos',
@@ -15,34 +19,46 @@ import { NavController } from '@ionic/angular';
   imports: [
     CommonModule,
     IonContent,
+    IonicModule ,
     HeaderComponent,
     IonInput,
     IonSelect, IonSelectOption,
     IonCard,
     IonIcon,
     CarritoComponent,
-    IonPopover
+    IonPopover,
+    FormsModule
   ]
 })
 export class CursosPage implements OnInit {
 
-  constructor(private eRef: ElementRef, private navCtrl: NavController) {
+  cursos: Curso[] = [];
+  estadoCarrito: boolean = false;
+
+  constructor(private eRef: ElementRef, private navCtrl: NavController,
+               private fire: FirestoreDatabaseService
+  ) {
 
     addIcons({ addCircleOutline, cart });
 
    }
 
   ngOnInit() {
+    this.cargarCursos();
+  }
+
+  cargarCursos() {
+    // Aquí puedes agregar tu lógica para obtener los cursos desde Firestore u otro servicio
+    this.fire.getCollectionChanges<Curso>('Curso').subscribe(cursos => {
+      this.cursos = cursos;
+    });
   }
 
   idCurso: string = "EsteEsElIDDelCurso";
   
-  estadoCarrito = false;
 
   cambiarEstadoCarrito() {
-
     this.estadoCarrito = !this.estadoCarrito;
-
   }
 
   @HostListener('document:click', ['$event'])
@@ -56,10 +72,13 @@ export class CursosPage implements OnInit {
 
   }
 
+  getPrecioFormateado(precio: string): string {
+    return parseFloat(precio).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+  }
+
   irDetalleCurso(id: string) {
 
     this.navCtrl.navigateForward("curso/DetalleCurso/" + id, { animated: false });
 
   }
-
 }

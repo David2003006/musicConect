@@ -3,9 +3,7 @@
 <ion-content>
   
   <div class="tituloPagina">
-
     <p id="titulo">RENTA</p>
-
   </div>
 
   <div class="content">
@@ -25,16 +23,14 @@
         </select>
       </div>
       
-      <div  id="selectTipo" class="input lg-3">
+      <div id="selectTipo" class="input lg-3">
         <label for="selectTipo" class="form-label">Tipo Renta</label>
         <select class="form-select" aria-label="Tipo Renta" label="Tipo Renta">
           <option selected value="Todos">Todos</option>
           <option value="opcion1">Opcion 1</option>
         </select>
       </div>
-      
       <ion-icon name="cart" id="carritoIcon" (click)="cambiarEstadoCarrito()"></ion-icon>
-      
     </div>
 
     <div id="popoverCarrito" [ngClass]="{'mostrar': estadoCarrito, 'ocultar': !estadoCarrito}">
@@ -42,64 +38,19 @@
     </div>
 
     <div class="listaProductos">
-
-      <div class="card datosProducto" (click)="irDetalleRenta(idProducto)">
+      <div 
+        class="card datosProducto" 
+        *ngFor="let producto of productos" 
+        (click)="irDetalleRenta(producto.ProductoID)">
         <div class="rentaMensual">
-          <p id="tipoProducto">M</p>
+          <p id="tipoProducto">{{ producto.RentaID }}</p>
         </div>
-        <img alt="Producto" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenProducto"/>
+        <img [src]="producto.imagen" alt="Producto" id="imagenProducto"/>
         <div class="card-body">
-          <p id="nombreProducto">NOMBRE PRODUCTO</p>
-          <p id="precioProducto">$00000.00 por mes</p>
+          <p id="nombreProducto">{{ producto.Nombre }}</p>
+          <p id="precioProducto">${{ producto.Precio }} por mes</p>
         </div>
       </div>
-
-      <div class="card datosProducto">
-        <div class="rentaSemanal">
-          <p id="tipoProducto">S</p>
-        </div>
-        <img alt="Producto" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenProducto"/>
-        <div class="card-body">
-          <p id="nombreProducto">NOMBRE PRODUCTO</p>
-          <p id="precioProducto">$00000.00 por semana</p>
-        </div>
-      </div>
-
-      <div class="card datosProducto">
-        <div class="rentaAmbas">
-          <p id="tipoProducto">A</p>
-        </div>
-        <img alt="Producto" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenProducto"/>
-        <div class="card-body">
-          <p id="nombreProducto">NOMBRE PRODUCTO</p>
-          <p id="precioProducto">$00000.00 por semana</p>
-        </div>
-      </div>
-
-      <div class="card datosProducto">
-        <div class="rentaSemanal">
-          <p id="tipoProducto">S</p>
-        </div>
-        <img alt="Producto" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenProducto"/>
-        <div class="card-body">
-          <p id="nombreProducto">NOMBRE PRODUCTO</p>
-          <p id="precioProducto">$00000.00 por semana</p>
-        </div>
-      </div>
-
-      <div class="card datosProducto">
-        <div class="rentaSemanal">
-          <p id="tipoProducto">S</p>
-        </div>
-        <img alt="Producto" src="https://ionicframework.com/docs/img/demos/avatar.svg" id="imagenProducto"/>
-        <div class="card-body">
-          <p id="nombreProducto">NOMBRE PRODUCTO</p>
-          <p id="precioProducto">$00000.00 por semana</p>
-        </div>
-      </div>
-
     </div>
-
-  </div>
-
+  </div> <!-- Cierre de .content -->
 </ion-content>
