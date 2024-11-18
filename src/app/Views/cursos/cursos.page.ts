@@ -77,4 +77,6 @@ export class CursosPage implements OnInit {
     this.navCtrl.navigateForward("curso/DetalleCurso/" + id, { animated: false });
 
   }
+
+  
 }

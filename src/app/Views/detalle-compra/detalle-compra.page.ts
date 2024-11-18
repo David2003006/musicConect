@@ -38,6 +38,7 @@ export class DetalleCompraPage implements OnInit {
       this.obtenerProducto(id);
     }
   }
+
   obtenerProducto(id: string) {
     this.fireStoreServices.getDoc<Producto>('Producto', id).subscribe((producto) => {
       this.producto = producto;

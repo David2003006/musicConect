@@ -56,7 +56,7 @@ export class CompraPage implements OnInit {
     });
   }
 
-  idProducto: string = "EsteEsElIDDelProducto";
+  //idProducto: string = "EsteEsElIDDelProducto";
   estadoCarrito = false;
 
   cambiarEstadoCarrito() {

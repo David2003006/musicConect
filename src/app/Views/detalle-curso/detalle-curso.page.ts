@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 export class DetalleCursoPage implements OnInit {
 
   @Input() cursoId!: string; // Recibe el ID del curso
+  loading: boolean = true; 
   curso?: Curso;
   constructor(
     private fireStoreServices: FirestoreDatabaseService,  // Servicio para obtener el curso
@@ -29,18 +30,26 @@ export class DetalleCursoPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('idCurso');  // 'idCurso' debe coincidir con el nombre en la ruta
+    const id = this.route.snapshot.paramMap.get('id');  // 'idCurso' debe coincidir con el nombre en la ruta
     console.log("El ID del curso es: " + id);
     if (id) {
       this.obtenerCurso(id);
     }
   }
-  obtenerCurso(id: string) {
-    // Llamada al servicio para obtener el curso
-    this.fireStoreServices.getDoc<Curso>('Curso', id).subscribe((curso) => {
-      this.curso = curso;
+  obtenerCurso(CursoID: string) {
+    this.fireStoreServices.getCursoByField(CursoID).subscribe({
+      next: (curso) => {
+        this.curso = curso;
+        console.log('Curso obtenido:', this.curso);
+        this.loading = false; // Finaliza el estado de carga
+      },
+      error: (err) => {
+        console.error('Error al obtener el curso:', err);
+        this.loading = false; // Finaliza el estado de carga en caso de error
+      },
     });
   }
+
   agregarAlCarrito() {
     // Obtener los valores seleccionados para el tipo de renta y el plazo
     const tipoRentaSeleccionado = (document.querySelector('#tipoRenta select') as HTMLSelectElement).value;
@@ -58,11 +67,14 @@ export class DetalleCursoPage implements OnInit {
         plazo: plazoIngresado
       }
     });
+
   }
   get requisitos(): string[] {
     return this.curso && typeof this.curso.Requisitos === 'string' 
       ? this.curso.Requisitos.split('.') 
       : [];
   }
+
+ 
 
 }
