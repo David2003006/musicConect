@@ -13,6 +13,8 @@ ion-content {
     --background: #FFE1FF;
 
 }
+
+
 p{
     @media(max-width: 480px){ 
       margin-top: 5%;
@@ -263,7 +265,7 @@ p{
 #tipoProducto {
 
     margin-bottom: 0%;
-    color: white;
+    color: black;
     font-size: 2vw;
     @media(max-width: 480px){ 
       font-size: 5vw;
