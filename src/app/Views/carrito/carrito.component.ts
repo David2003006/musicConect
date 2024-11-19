@@ -20,6 +20,7 @@ export class CarritoComponent implements OnInit {
   productosCarrito: Carrito[] = [];
   totalCarrito: number = 0;
 
+  //Se agego la funcionalida del icono del carrito
   constructor(private navCtrl: NavController, private carritoService: CarritoService) {}
 
   ngOnInit() {
