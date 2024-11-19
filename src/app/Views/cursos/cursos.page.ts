@@ -86,7 +86,7 @@ export class CursosPage implements OnInit {
         this.filtrarProductos(); // Filtrar productos según la categoría seleccionada
       });
     } else {
-      this.categoriaIdSeleccionado = "Todos"; // Si es "Todos", mostramos todos los productos
+      this.categoriaSeleccionado = "Todos"; // Si es "Todos", mostramos todos los productos
       this.cargarCursos(); // Cargar todos los productos
     }
   }
