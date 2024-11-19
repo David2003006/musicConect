@@ -29,7 +29,8 @@ export interface Carrito{
     Precio : number,
     Tipo : string ,
     Total: number,
-    imagen: string
+    imagen: string,
+    //Plazo: string
 }
 
 export interface Curso{
