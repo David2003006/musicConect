@@ -33,6 +33,7 @@ export interface Carrito{
 
 export interface Curso{
     CursoID: string,
+    CategoriaID: string;
     Nombre: string,
     Precio: string,
     UsuarioID: string,

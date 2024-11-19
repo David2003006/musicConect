@@ -49,6 +49,7 @@ export class FirestoreDatabaseService {
           // Construcción manual del objeto basado en la interfaz Curso
           const curso: Curso = {
             CursoID: data['CursoID'] || '',
+            CategoriaID: data['CategoriaID'] || '',
             Nombre: data['Nombre'] || '',
             Precio: data['Precio'] || '',
             UsuarioID: data['UsuarioID'] || '',

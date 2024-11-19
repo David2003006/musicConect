@@ -1,8 +1,7 @@
 
 import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
-import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
+import { IonContent, IonIcon } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { cart } from 'ionicons/icons';
@@ -24,12 +23,9 @@ import { FiltrosService } from 'src/app/Services/filtros.service';
     IonContent,
     //IonicModule,
     HeaderComponent,
-    IonInput,
-    IonSelect, IonSelectOption,
-    IonCard,
+
     IonIcon,
     CarritoComponent,
-    IonPopover, 
     CommonModule,
     FormsModule
   ]
@@ -81,7 +77,7 @@ export class CompraPage implements OnInit {
   }
 
   // Función para filtrar los productos según la categoría seleccionada
-  filtrarProductos() {
+ filtrarProductos() {
     if (this.categoriaIdSeleccionada) {
       this.productos = this.productos.filter(producto => producto.CategoriaID === this.categoriaIdSeleccionada);
     }
@@ -94,7 +90,6 @@ export class CompraPage implements OnInit {
     }
 
   }
-
 
   idProducto: string = "EsteEsElIDDelProducto";
   estadoCarrito = false;
