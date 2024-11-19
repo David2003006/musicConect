@@ -1,6 +1,6 @@
 
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
-import { IonContent, IonIcon } from '@ionic/angular/standalone';
+import { Component, OnInit, HostListener, ElementRef, ChangeDetectorRef } from '@angular/core';
+import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';

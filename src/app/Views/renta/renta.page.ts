@@ -12,8 +12,7 @@ import { collection, getDocs } from '@angular/fire/firestore';
 import { map, switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { FiltrosService } from 'src/app/Services/filtros.service';
-
-
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-renta',
@@ -36,6 +35,7 @@ import { FiltrosService } from 'src/app/Services/filtros.service';
     FormsModule
   ]
 })
+
 export class RentaPage implements OnInit {
 
   productos: Producto[] = [];  // Lista de productos originales
