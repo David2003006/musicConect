@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IonContent, IonList, IonItem, IonIcon, IonButton, IonListHeader } from '@ionic/angular/standalone';
 import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
-import { trash } from 'ionicons/icons';
+import { contractOutline, enter, trash } from 'ionicons/icons';
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
 import { Carrito, Producto } from 'src/app/Models/Interfaces';
@@ -39,65 +39,73 @@ export class ListaCarritoPage implements OnInit {
     // Suscripción a los parámetros de la ruta para agregar productos al carrito
     this.route.queryParams.subscribe(params => {
       const idProducto = params['idProducto'];
-      const nombreProducto = params['nombreProducto'];
-      const precio = params['precio'];
-      const cantidad = params['cantidad'];
-      
-      // Si se recibe `idProducto`, agregar al carrito
+      let cantidad = +params['cantidad'];
+      const plazo = params['plazo'];
+      const tipo = params['tipo'];
+      const renta: boolean = params['renta'] === 'true';  // Convierte a booleano
+
+      if (cantidad <= 0 || isNaN(cantidad)) {
+        cantidad  = 1;  // Asigna 1 si la cantidad es 0 o no es un número válido
+      }
+  
+      console.log("idProducto", idProducto, "la cantidad", cantidad, "el plazo", plazo, "el tipo", tipo, "renta", renta);
+
       if (idProducto) {
-        const producto: Producto = {
-          CategoriaID: '', // o el valor real si está disponible
-          Nombre: nombreProducto,
-          Precio: +precio,
-          ProductoID: idProducto,
-          descripcion: '', // Descripción del producto o texto predeterminado si no está disponible
-          Compra: false,   // Asigna `true` o `false` según corresponda en tu lógica
-          cantidad: +cantidad,
-          RentaID: '',     // ID de renta, o valor vacío si no es aplicable
-          imagen: ''       // URL de la imagen o cadena vacía si no tienes este dato
-        };
-        this.agregarAlCarrito(producto, cantidad);
+        // Obtener el producto desde Firebase
+        console.log("entre");
+        this.fire.getDocumentChanges<Producto>(`Producto/${idProducto}`).subscribe((producto) => {
+          if (producto != null) {
+            // Verificar si el producto es una compra o una renta
+            console.log("Si lo encontre");
+            if (renta) {
+              this.agregarAlCarrito(producto, cantidad, plazo, tipo, renta);  // Pasar 'renta' como argumento
+            } else {
+              console.log("No vino de renta");
+              this.agregarAlCarrito(producto, cantidad, plazo, tipo, renta);  // Pasar 'renta' como argumento
+            }
+          } else {
+            console.log("No lo encontre");
+          }
+        });
       }
     });
   
     // Cargar los productos del carrito desde el servicio
+    this.cargarProductos();
+  }
+
+  cargarProductos() {
+    // Cargar productos y actualizar el total desde el servicio
     this.productosEnCarrito = this.carritoService.getProductosCarrito();
-    
-    // Actualizar el total después de cargar los productos
     this.totalCarrito = this.carritoService.calcularTotal();
   }
 
-  agregarAlCarrito(producto: Producto, cantidad: number) {
-    if (producto) {
-      const productoCarrito: Carrito = {
-        idProducto: producto.ProductoID,
-        Nombre: producto.Nombre,
-        Precio: producto.Precio,
-        Tipo: 'Compra', // O `tipoRenta` si es de renta
-        Total: producto.Precio * cantidad,
-        imagen: producto.imagen // Verifica si tienes este campo en `Producto`
-      };
-  
-      // Agregar el producto al carrito usando el servicio
-      this.carritoService.agregarProducto(productoCarrito);
-  
-      // Actualizar la lista de productos en la vista
-      this.productosEnCarrito = this.carritoService.getProductosCarrito();
-      
-      // Actualizar el total
-      this.totalCarrito = this.carritoService.calcularTotal();
-    }
+  agregarAlCarrito(producto: Producto, cantidad: number = 1, plazo?: string, tipo?: string, renta?: boolean) {
+    // Si es renta, el precio total podría ser diferente o estar vacío
+    const precioProducto = producto.Precio > 0 ? producto.Precio : 0;
+
+    console.log("Este es el precio", precioProducto, "Esta es la cantidad", cantidad)
+
+    // Crear el objeto del producto para el carrito
+    const productoCarrito: Carrito = {
+      idProducto: producto.ProductoID,
+      Nombre: producto.Nombre,
+      Precio: precioProducto, // Asigna el precio verificado
+      Tipo: renta ? 'Renta' : (producto.Compra ? 'Compra' : tipo || 'Compra'), // Si es renta, marcar como 'Renta'
+      Total: precioProducto * cantidad, // Calcula el total con el precio validado
+      imagen: producto.imagen,
+      Plazo: renta ? (plazo || '') : '', // Solo asignar plazo si es renta
+    };
+
+    console.log("esto se va a agregar al carrito", productoCarrito)
+    // Agregar el producto al carrito usando el servicio
+    this.carritoService.agregarProducto(productoCarrito);
+    this.cargarProductos();  // Recargar productos y actualizar el total
   }
 
   eliminarProducto(idProducto: string) {
     // Eliminar el producto del carrito usando el servicio
     this.carritoService.eliminarProducto(idProducto);
-    
-    // Actualizar la lista de productos en la vista
-    this.productosEnCarrito = this.carritoService.getProductosCarrito();
-    
-    // Actualizar el total
-    this.totalCarrito = this.carritoService.calcularTotal();
+    this.cargarProductos();  // Recargar productos y actualizar el total
   }
-  
 }

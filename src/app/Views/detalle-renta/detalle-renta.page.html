@@ -27,16 +27,16 @@
       <div class="renta">
         <div id="tipoRenta" class="input">
           <label for="tipoRenta" class="form-label">Tipo Renta</label>
-          <select class="form-select" aria-label="Tipo Renta" label="Tipo Renta">
-            <option [selected]="producto?.RentaID === 'S'" value="semanal">Semanal</option>
-            <option [selected]="producto?.RentaID === 'M'" value="mensual">Mensual</option>
-            <option [selected]="producto?.RentaID === 'A'" value="anual">Anual</option>
+          <select class="form-select" [(ngModel)]="tipoRenta" aria-label="Tipo Renta">
+            <option value="semanal">Semanal</option>
+            <option value="mensual">Mensual</option>
+            <option value="anual">Anual</option>
           </select>
         </div>
 
         <div id="plazo" class="input">
           <label for="plazo" class="form-label">Plazo</label>
-          <input type="number" class="form-control" placeholder="Plazo" aria-label="Plazo" aria-describedby="basic-addon1" value="0" min="0">
+          <input type="number" class="form-control" [(ngModel)]="plazo" placeholder="Plazo" aria-label="Plazo" aria-describedby="basic-addon1" value="0" min="0">
         </div>
       </div>
       <button type="button" class="btn" id="agregarCarrito" (click)="agregarAlCarrito()">Agregar al Carrito</button>

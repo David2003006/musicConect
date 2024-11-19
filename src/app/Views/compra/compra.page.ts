@@ -11,6 +11,7 @@ import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.se
 import { Producto } from 'src/app/Models/Interfaces';
 import { map } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { FiltrosService } from 'src/app/Services/filtros.service';
 
 @Component({
   selector: 'app-renta',
@@ -35,8 +36,12 @@ import { FormsModule } from '@angular/forms';
 export class CompraPage implements OnInit {
   productos: Producto[] = [];
   productosEnCarrito: any [] = [];
+  categoriaSeleccionada: string = 'Todos'; // Asegúrate de que esta variable esté definida
+  categoriaIdSeleccionada: string | undefined = undefined; 
+  textoBusqueda: string = '';
 
-  constructor(private eRef: ElementRef, private navCtrl: NavController, private fire: FirestoreDatabaseService) { 
+  constructor(private eRef: ElementRef, private navCtrl: NavController, 
+    private fire: FirestoreDatabaseService, private filtrosService: FiltrosService) { 
     addIcons({ cart });
   }
 
@@ -52,8 +57,42 @@ export class CompraPage implements OnInit {
       )
     ).subscribe((productosActualizados) => {
       this.productos = productosActualizados;
+      console.log("Productos obtenidos:", this.productos);
+      this.filtrarProductos(); 
     });
   }
+
+  obtenerIdsFiltros() {
+    console.log("Categoria seleccionada: ", this.categoriaSeleccionada);
+
+    // Si la categoría no es "Todos", obtenemos el ID de la categoría
+    if (this.categoriaSeleccionada !== 'Todos') {
+      this.filtrosService.getCategoriaIdByName(this.categoriaSeleccionada).subscribe(id => {
+        this.categoriaIdSeleccionada = id;
+        console.log("ID de la categoría seleccionada: ", this.categoriaIdSeleccionada);
+        this.filtrarProductos(); // Filtrar productos según la categoría seleccionada
+      });
+    } else {
+      this.categoriaIdSeleccionada = "Todos"; // Si es "Todos", mostramos todos los productos
+      this.obtenerProductos(); // Cargar todos los productos
+    }
+  }
+
+  // Función para filtrar los productos según la categoría seleccionada
+  filtrarProductos() {
+    if (this.categoriaIdSeleccionada) {
+      this.productos = this.productos.filter(producto => producto.CategoriaID === this.categoriaIdSeleccionada);
+    }
+
+    if (this.textoBusqueda.trim() !== '') {
+      // Filtrar por el texto de búsqueda (en este caso por el nombre del producto)
+      this.productos = this.productos.filter(producto => 
+        producto.Nombre.toLowerCase().includes(this.textoBusqueda.toLowerCase())
+      );
+    }
+
+  }
+
 
   idProducto: string = "EsteEsElIDDelProducto";
   estadoCarrito = false;

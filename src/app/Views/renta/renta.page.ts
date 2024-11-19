@@ -1,15 +1,14 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
-import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
-import { addIcons } from 'ionicons';
-import { cart } from 'ionicons/icons';
-import { CarritoComponent } from '../carrito/carrito.component';
-import { NavController } from '@ionic/angular';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
-import { Producto, Renta } from 'src/app/Models/Interfaces';
-import { collection, getDocs } from '@angular/fire/firestore';
-import { map, switchMap } from 'rxjs';
+import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
+import { Producto } from 'src/app/Models/Interfaces';// Importa la interfaz del producto
+import { FiltrosService } from 'src/app/Services/filtros.service';
+import { cart, contractOutline } from 'ionicons/icons';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { NavController } from '@ionic/angular';
+import { HeaderComponent } from '../header/header.component';
+import { CarritoComponent } from '../carrito/carrito.component';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,6 +19,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     IonContent,
+    //IonicModule,
     HeaderComponent,
     IonInput,
     IonSelect, IonSelectOption,
@@ -32,81 +32,112 @@ import { FormsModule } from '@angular/forms';
   ]
 })
 export class RentaPage implements OnInit {
-    productos : Producto[] = []
+
+  productos: Producto[] = [];  // Lista de productos originales
+  productosFiltrados: Producto[] = []; // Lista de productos filtrados
+  busqueda: string = '';  // Filtro de búsqueda
+  categoriaSeleccionada: string = 'Todos'; // Filtro de categoría
+  tipoRentaSeleccionado: string = 'Todos'; // Filtro de tipo renta
+
+  categoriaIdSeleccionada: string | undefined = undefined; // ID de categoría seleccionada
+  tipoRentaIdSeleccionado: string | undefined = undefined; // ID de tipo renta seleccionado
 
 
-  constructor(private eRef: ElementRef, private navCtrl: NavController, private fire: FirestoreDatabaseService) { 
-
-    addIcons({ cart });
-
-  }
+  constructor(
+    private filtrosService: FiltrosService,
+    private fire: FirestoreDatabaseService,
+    private eRef: ElementRef, 
+    private  navCtrl: NavController) {}
 
   ngOnInit() {
+    // Obtener los productos
     this.obtenerProductos();
+    // Obtener los ids de las categorías y tipos de renta al inicio
+    this.obtenerIdsFiltros()
   }
 
+  obtenerIdsFiltros() {
+    console.log("Tipo renta seleccionado:", this.tipoRentaSeleccionado);
+  
+    // Obtener el id de la categoría seleccionada
+    if (this.categoriaSeleccionada !== 'Todos') {
+      this.filtrosService.getCategoriaIdByName(this.categoriaSeleccionada).subscribe(id => {
+        this.categoriaIdSeleccionada = id;
+        this.filtrarProductos(); // Volver a filtrar con el nuevo id de categoría
+      });
+    }
+  
+    // Obtener el id del tipo de renta seleccionado
+    if (this.tipoRentaSeleccionado !== 'Todos') {
+      if(this.tipoRentaSeleccionado === 'Semanal'){
+        this.tipoRentaIdSeleccionado = 'S'
+        this.filtrarProductos()
+      }else{
+        if(this.tipoRentaSeleccionado === 'Mensual'){
+          this.tipoRentaIdSeleccionado = 'M'
+          this.filtrarProductos()
+        }else{
+          this.tipoRentaIdSeleccionado = 'A'
+          this.filtrarProductos()
+        }
+      }
+    }
+  }
+  
   obtenerProductos() {
-    this.fire.getCollectionChanges<Renta>('TipoRenta').pipe(
-      // Mapeamos los resultados de TipoRenta a un diccionario que asocia cada ID con su símbolo
-      map((tipoRentaList) => {
-        const tipoRentaMap = new Map<string, string>();
-        tipoRentaList.forEach((tipoRenta) => {
-          if (tipoRenta.Nombre === 'Semanal') {
-            tipoRentaMap.set(tipoRenta.RentaID, 'S');
-          } else if (tipoRenta.Nombre === 'Anual') {
-            tipoRentaMap.set(tipoRenta.RentaID, 'A');
-          } else if (tipoRenta.Nombre === 'Mensual') {
-            tipoRentaMap.set(tipoRenta.RentaID, 'M');
-          }
-        });
-        return tipoRentaMap;
-      }),
-      // Luego, obtenemos los productos y actualizamos la propiedad RentaID
-      switchMap((tipoRentaMap) => 
-        this.fire.getCollectionChanges<Producto>('Producto').pipe(
-          map((productos) => 
-            productos.map((producto) => {
-              const rentaSimbolo = tipoRentaMap.get(producto.RentaID);
-              return {
-                ...producto,
-                RentaID: rentaSimbolo ? rentaSimbolo : producto.RentaID // Asigna símbolo o mantiene el ID original si no existe en el map
-              };
-            })
-          )
-        )
-      )
-    ).subscribe((productosActualizados) => {
-      this.productos = productosActualizados;
+    console.log("Obteniendo productos desde la base de datos...");
+    this.fire.getCollectionChanges<Producto>('Producto').subscribe((productos: Producto[]) => {
+      this.productos = productos;
+      this.filtrarProductos(); // Llamar a filtrarProductos para mostrar todos los productos
+    }, error => {
+      console.error("Error al obtener productos:", error);
     });
   }
+  
 
+  // Función para filtrar los productos
+  filtrarProductos() {
+    this.productosFiltrados = this.productos.filter((producto) => {
+      let cumpleCategoria = true;
+      let cumpleTipoRenta = true;
+      let cumpleBusqueda = true;
 
-  idProducto: string = "EsteEsElIDDelProducto";
+      // Filtrar por categoría (por id)
+      if (this.categoriaIdSeleccionada && this.categoriaIdSeleccionada !== 'Todos') {
+        cumpleCategoria = producto.CategoriaID === this.categoriaIdSeleccionada;
+      }
+
+      // Filtrar por tipo renta (por id)
+      if (this.tipoRentaIdSeleccionado && this.tipoRentaIdSeleccionado !== 'Todos') {
+        cumpleTipoRenta = producto.RentaID === this.tipoRentaIdSeleccionado;
+      }
+
+      // Filtrar por búsqueda
+      if (this.busqueda) {
+        cumpleBusqueda = producto.Nombre.toLowerCase().includes(this.busqueda.toLowerCase());
+      }
+
+      return cumpleCategoria && cumpleTipoRenta && cumpleBusqueda;
+    });
+  }
 
   estadoCarrito = false;
 
   cambiarEstadoCarrito() {
-
     this.estadoCarrito = !this.estadoCarrito;
-
   }
 
   @HostListener('document:click', ['$event'])
   clickOut(event: any) {
-
     if (!this.eRef.nativeElement.contains(event.target)) {
-    
       this.estadoCarrito = false;
-    
     }
-
   }
+
 
   irDetalleRenta(id: string) {
-
     this.navCtrl.navigateForward("renta/" + id, { animated: false });
   }
-
 }
 
 
