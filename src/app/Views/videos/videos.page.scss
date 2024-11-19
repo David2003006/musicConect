@@ -11,8 +11,55 @@ app-header {
 ion-content {
 
     --background: #FFE1FF;
+    --padding-start: 3%;
+    --padding-end: 2%;
 
 }
+ion-modal{
+    --width: 75%;
+    --height: 100%;
+    
+    @media(max-width: 480px){ 
+        --width: 88%;
+        --height: 25%;
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+    --width: 85%;
+    --height: 38%;
+    }
+
+}
+.form-select{
+  @media(max-width: 480px){ 
+     font-size: 2vh;
+     
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {      
+    font-size: 2vh;
+    max-width: 50%;
+    }
+}
+.form-control{
+  @media(max-width: 480px){ 
+    font-size: 2vh;
+
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    font-size: 2vh;
+
+    }
+}
+.form-select option{
+    @media(max-width: 480px){ 
+      font-size: 1vh;
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 1.3vh;
+
+    }
+
+}
+
 
 .tituloPagina, .content {
 
@@ -37,9 +84,14 @@ ion-content {
     min-height: max-content;
     padding-bottom: 2%;
     border-radius: 1%;
-    height: 78%;
+    height:max-content;
     width: 98%;
     left: 1%;
+    margin-top:10%;
+    @media (min-width: 1025px){
+        margin-top:1%;
+        }
+
 
 }
 
@@ -58,8 +110,9 @@ ion-content {
     font-weight: bolder;
     position: relative;
     margin-bottom: 0%;
-    font-size: 3.5vh;
+    font-size: 2.7vh;
     overflow: hidden;
+    margin-left: 0.6vh;
 
 }
 
@@ -73,6 +126,12 @@ ion-content {
     color: black;
     height: 100%;
     width: 20%;
+    @media(max-width: 480px){ 
+      flex-basis: 351px;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -98,6 +157,16 @@ ion-content {
     width: 94%;
     left: 3%;
     top: 2%;
+    bottom:4.5vh;
+    padding-top:6vh;
+    @media(max-width: 480px){ 
+     font-size: 2.5vh;
+     width: 123%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    font-size: 3.1vh;
+    width: 123%;
+ }
 
 }
 
@@ -115,6 +184,10 @@ ion-content {
     font-weight: bold;
     width: 25%;
     left: 3%;
+  
+  @media (min-width: 481px) and (max-width: 1024px) {
+  width: 30%;
+ }
 
 }
 
@@ -144,6 +217,7 @@ ion-content {
     top: 19%;
     left: 1%;
 
+
 }
 
 #tituloReproductor {
@@ -157,6 +231,12 @@ ion-content {
     opacity: 1;
     width: 80%;
     left: 1%;
+    @media(max-width: 480px){ 
+     font-size: 3vh;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -169,15 +249,29 @@ ion-content {
     z-index: 2;
     opacity: 0;
     left: 95%;
+    @media(max-width: 480px){ 
+     left: 85%;
+     font-size: 5vh;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    left: 90%;
+    font-size: 5vh;
+ }
 
 }
 
 #video {
 
     position: relative;
-    height: 72%;
+    height: 100%;
     width: 100%;
     z-index: 1;
+    @media(max-width: 480px){ 
+      height: 100%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 

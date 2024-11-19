@@ -13,6 +13,12 @@ $color-secundario: #E4B1F0;
     overflow-y: auto;
     width: 100%;
     height: 92%;
+    @media(max-width: 480px){ 
+  
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -51,6 +57,13 @@ $color-secundario: #E4B1F0;
     margin-bottom: 0%;
     overflow: hidden;
     font-size: 3vh;
+    @media(max-width: 480px){ 
+        font-size: 2vh;
+
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 2.2vh;
+ }
     
 }
 
@@ -64,12 +77,16 @@ $color-secundario: #E4B1F0;
 #nombreCarrito {
     
     font-weight: bold;
+
     
 }
 
 #tipoCarrito, #cantidadCompra, #tiempoRenta {
 
     margin-bottom: 0%;
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 2vh;
+    }
 
 }
 
@@ -84,6 +101,8 @@ $color-secundario: #E4B1F0;
 #tipoCarrito {
 
     text-align: center;
+ 
+  
     
 }
 
@@ -110,12 +129,28 @@ $color-secundario: #E4B1F0;
     display: flex;
     width: 100%;
     height: 8%;
+    @media(max-width: 480px){ 
+        height: 16%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+       height: 16%;
+       font-size: 1.9vh;
+    }
+    
 
 }
 
 #verCarrito, .totalCarrito {
 
     margin-bottom: 0%;
+    @media(max-width: 480px){ 
+     margin: 1vh;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    margin: 1vh;
+
+ }
+
 
 }
 
@@ -130,7 +165,14 @@ $color-secundario: #E4B1F0;
     text-align: right;
     font-weight: bold;
     width: 80%;
+    @media(max-width: 480px){ 
+        width: 45%;
 
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    width: 45%;
+
+ }
 }
 
 #totalFinal {

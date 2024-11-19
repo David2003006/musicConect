@@ -20,26 +20,59 @@ p {
 
 }
 
+.form-select option{
+    @media(max-width: 480px){ 
+        font-size: 1vh;
+
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+    font-size: 1vh;
+
+    }
+}
+
+
 .content {
 
     background-color: white;
     border-radius: 1vh;
     position: relative;
+    display:block;
     color: black;
-    height: 85%;
+    height: max-content;
     width: 98%;
     left: 1%;
     top: 12%;
+    padding-top: 5vh;
+    margin-top: -6vh;
+  
+
 
 }
 
 .imagenes {
 
     position: relative;
-    height: 96%;
-    width: 48%;
+    height: 87vh;
+    width: 45%;
     left: 1%;
     top: 2%;
+    @media(max-width: 480px){ 
+        width: 40vh;
+        height: 40vh;
+        left: 3%;
+        margin-bottom: 4vh; 
+    
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        width: 40vh;
+        height: 40vh;
+        margin-bottom: 4vh; 
+        left: 3%;
+
+ }
 
 }
 
@@ -75,17 +108,38 @@ p {
 .datosProducto {
 
     position: relative;
-    height: 96%;
-    bottom: 94%;
-    width: 48%;
+    height: 64vh;
+    width: 66vh;
     left: 51%;
+    bottom: 86vh;
 
+    @media(max-width: 480px){ 
+    height: 62vh;
+    width: 44vh;
+    left: 2%;
+    bottom: 1vh;
+  
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    height: 84vh;
+    width: 66vh;
+    left: 4%;
+    bottom: 1vh;
+ }
 }
 
 #nombre {
 
     font-weight: bold;
     font-size: 5vh;
+    @media(max-width: 480px){ 
+        font-size: 3vh;
+
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
+  
 
 }
 
@@ -99,14 +153,23 @@ p {
 
     font-weight: bold;
     font-size: 5vh;
+    margin-top: 1vh;
+    @media(max-width: 480px){ 
+    font-size: 3vh;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
+
 
 }
 
 .areaDescripcion {
 
     position: relative;
-    height: 33%;
+    height: 24%;
     width: 98%;
+    margin-bottom: 1vh;
 
 }
 
@@ -166,6 +229,7 @@ p {
 
 }
 
+
 #agregarCarrito {
 
     background-color: green;
@@ -175,5 +239,12 @@ p {
     height: 10%;
     width: 98%;
     top: 4%;
+    margin-top: 3vh;
+    @media(max-width: 480px){ 
+  
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }

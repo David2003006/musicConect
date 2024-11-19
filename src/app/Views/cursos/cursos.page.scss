@@ -11,8 +11,41 @@ app-header {
 ion-content {
 
     --background: #FFE1FF;
+    --padding-start: 0.7%;
+
 
 }
+.form-select option{
+    @media(max-width: 480px){
+     font-size: 2vh;
+    
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+     font-size: 1.1vh;
+
+ }
+}
+.form-select{
+  @media(max-width: 480px){ 
+        font-size: 3vh;
+        max-width: 12vh;
+
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+     font-size: 3vh;
+     max-width: 11vh;
+     padding-left: 0.125rem;
+ }
+
+}
+
+.form-control{
+    @media (min-width: 481px) and (max-width: 1024px) {
+       font-size: 2.5vh;
+       }
+}
+
+
 
 .tituloPagina, .content {
 
@@ -38,9 +71,13 @@ ion-content {
     padding-bottom: 1%;
     margin-bottom: 1%;
     border-radius: 1%;
-    height: 78%;
+    height:max-content;
     width: 98%;
     left: 1%;
+    @media (min-width: 1025px){
+        margin-top:1%;
+        }
+
 
 }
 
@@ -54,7 +91,14 @@ ion-content {
     width: 30%;
     left: 68%;
     top: 19%;
-
+    @media(max-width: 480px){ 
+     width: 36%;
+     left: 61%;
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+     width: 35%;
+     left: 60%;
+    }
 }
 
 #inputProducto, #selectCategoria {
@@ -62,6 +106,10 @@ ion-content {
     position: relative;
     font-weight: bold;
     width: 90%;
+    @media (min-width: 481px) and (max-width: 1024px) {
+    font-size: 2.7vh;
+       }
+
 
 }
 
@@ -74,6 +122,12 @@ ion-content {
 #selectCategoria {
 
     top: 30%;
+    @media(max-width: 480px){ 
+      width: 80%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+     width: 89%;
+ }
 
 }
 
@@ -91,12 +145,23 @@ ion-content {
     margin-bottom: 1%;
     color: black;
     width: 95%;
+    @media(max-width: 480px){ 
+     margin-bottom: 3%;
+     min-height: 19vh;
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+        width: 84%;
+        min-height: 39vh;
+        margin-top:2vh;
+    }
+
 
 }
 
 .datosProducto > .card-body {
 
     padding: 0%;
+   
 
 }
 
@@ -114,6 +179,13 @@ ion-content {
     display: flex;
     width: 70%;
     top: 1%;
+    @media(max-width: 480px){ 
+     width: 60%;
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+     width: 65%;
+
+ }
 
 }
 
@@ -127,6 +199,13 @@ ion-content {
     font-size: 3.5vh;
     overflow: hidden;
     width: 100%;
+    @media(max-width: 480px){ 
+      font-size: 2.3vh;
+      margin-bottom: 10%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    font-size: 3.1vh;
+ }
 
 }
 
@@ -148,6 +227,14 @@ ion-content {
     overflow: hidden;
     font-size: 3vh;
     width: 70%;
+    @media(max-width: 480px){ 
+      margin-top: 1vh;
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+    margin-top: 1.1vh;
+    margin-left: 1vh;
+
+    }
 
 }
 
@@ -156,6 +243,12 @@ ion-content {
     position: relative;
     font-size: 7vh;
     width: 20%;
+    @media(max-width: 480px){ 
+     margin-left: 1.5vh;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -163,6 +256,13 @@ ion-content {
 
     justify-content: center;
     display: flex;
+    @media(max-width: 480px){ 
+      width: 98%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+      width: 98%;
+
+    }
 
 }
 
@@ -173,8 +273,28 @@ ion-content {
     display: flex;
     width: 41%;
     left: 1%;
+    @media(max-width: 480px){ 
+     width: 86%;
+     align-items:normal;
+     margin-left: 3%;
+    }
+   @media (min-width: 481px) and (max-width: 1024px) {
+    width: 80%;
+    align-items:normal;
+    margin-left: 3%;
+   }
+   
 
 }
+.columnaPrecio{
+    @media(max-width: 480px){ 
+        width: 95%;
+       }
+      @media (min-width: 481px) and (max-width: 1024px) {
+        width: 95%;
+      }
+}
+
 
 #carritoIcon {
 

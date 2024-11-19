@@ -73,6 +73,7 @@ p {
     overflow-y: auto;
     height: 100%;
     width: 60%;
+   
 
 }
 
@@ -134,17 +135,29 @@ p {
     justify-content: space-between;
     flex-direction: row;
     display: flex;
+    cursor: pointer;
+
+
+
 
 }
 
 #iconoDown {
 
-    transition: all 0.1s ease;
-    transform: rotate(270deg);
-    position: relative;
+   // transition: all 0.1s ease;
+    //transform: rotate(270deg);
+    //position: relative;
     font-size: 5vh;
 
-}
+    transition: transform 0.3s;
+    cursor: pointer;
+
+    &.expanded {
+      transform: rotate(180deg);
+    }
+  }
+   
+  
 
 .secciones video {
 

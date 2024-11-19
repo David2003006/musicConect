@@ -1,3 +1,17 @@
+.form-control{
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 3vh
+    } 
+}
+.form-label{
+
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 3vh
+    } 
+
+
+}
+
 #logo {
 
     position: absolute;
@@ -20,6 +34,20 @@
     left: 35%;
     top: 15%;
 
+    @media(max-width: 480px){ 
+    width: 70%;
+    left: 16%;
+
+
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+     width: 70%;
+     left: 16%;   
+        
+
+ }
+
 }
 
 .contentLogin {
@@ -39,6 +67,13 @@
     font-weight: 600;
     font-size: 4vh;
     color: black;
+    @media(max-width: 480px){ 
+    font-size: 3vh;
+
+
+    }
+ 
+ 
 
 }
 
@@ -73,6 +108,15 @@
     color: white;
     width: 90%;
 
+    @media(max-width: 480px){ 
+        margin-top: 40%;
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        margin-top: 25%;
+        font-size: 3vh;
+ }
+
 }
 
 #contraOlvidada {
@@ -82,6 +126,15 @@
     font-size: 3vh;
     color: blue;
 
+    @media(max-width: 480px){ 
+        font-size: 2vh;
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 4vh;
+
+ }
+
 }
 
 #sinCuenta {
@@ -90,6 +143,21 @@
     font-size: 2.5vh;
     margin-top: 0%;
     color: black;
+
+    @media(max-width: 480px){ 
+
+        font-size: 2vh;
+   
+
+
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        
+
+
+
+ }
 
 }
 

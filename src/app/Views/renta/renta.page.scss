@@ -13,6 +13,25 @@ ion-content {
     --background: #FFE1FF;
 
 }
+p{
+    @media(max-width: 480px){ 
+      margin-top: 5%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
+}
+.form-select option{
+    @media(max-width: 480px){ 
+        font-size: 0.85vh;
+
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
+}
 
 .tituloPagina, .content {
 
@@ -36,9 +55,14 @@ ion-content {
     min-height: max-content;
     padding-bottom: 2%;
     border-radius: 1%;
-    height: 78%;
+    height:max-content;
     width: 98%;
     left: 1%;
+    margin-top:10%;
+    @media (min-width: 1025px){
+        margin-top:1%;
+        }
+
 
 }
 
@@ -47,6 +71,14 @@ ion-content {
     object-fit: cover;
     width: 100%;
     height: 80%;
+
+    @media(max-width: 480px){ 
+     max-height: 60%;
+    }
+   @media (min-width: 481px) and (max-width: 1024px) {
+     max-height: 60%;
+   }
+
 
 }
 
@@ -57,8 +89,16 @@ ion-content {
     font-weight: bolder;
     position: relative;
     margin-bottom: 0%;
-    font-size: 3.5vh;
+    font-size: 2.5vh;
     overflow: hidden;
+    @media(max-width: 480px){ 
+      font-size: 1.4vh;
+
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    font-size: 1.4vh;
+    margin-bottom: 3%;
+    }
 
 }
 
@@ -69,6 +109,16 @@ ion-content {
     position: relative;
     overflow: hidden;
     font-size: 3vh;
+    @media(max-width: 480px){ 
+      font-size: 2vh;
+      white-space: normal;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    font-size: 1.7vh;
+    white-space: normal;
+
+
+    }
 
 }
 
@@ -81,12 +131,24 @@ ion-content {
     flex-basis: 240px;
     color: black;
     width: 20%;
+    @media(max-width: 480px){ 
+        flex-basis: 40%;
+
+      }
+
 
 }
 
 .datosProducto > .card-body {
 
-    padding: 0%;
+    padding: 2%;
+
+    @media(max-width: 480px){ 
+     padding: 5%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    padding: 5%;
+ }
 
 }
 
@@ -106,6 +168,18 @@ ion-content {
     width: 94%;
     left: 3%;
     top: 2%;
+    bottom: 4.5vh;
+    padding-top: 6vh;
+
+
+    @media(max-width: 480px){ 
+        font-size: 2vh;
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 2.5vh;
+ }
 
 }
 
@@ -191,6 +265,13 @@ ion-content {
     margin-bottom: 0%;
     color: black;
     font-size: 2vw;
+    @media(max-width: 480px){ 
+      font-size: 5vw;
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -200,6 +281,18 @@ ion-content {
     position: relative;
     font-size: 10vh;
     left: 20%;
+    @media(max-width: 480px){ 
+        left: 11%;
+        font-size: 5vh;
+        margin-top: 8%;
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        left: 15%;
+        font-size: 5.5vh;
+        margin-top: 5%;
+        
+ }
     
 }
 
@@ -220,6 +313,14 @@ ion-content {
 
     transform: scaleY(1);
     opacity: 100;
+    @media(max-width: 480px){ 
+        width: 30vh;
+        left: 30%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    width: 45vh;
+    left: 37%;
+ }
 
 }
 

@@ -16,6 +16,17 @@ ion-content {
     --background: #FFE1FF;
 
 }
+.form-control{
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size:2vh;
+    }
+}
+table{
+    @media (min-width: 481px) and (max-width: 1024px) {
+     font-size: 2vh;
+    }
+
+}
 
 .content {
 
@@ -32,6 +43,15 @@ ion-content {
     width: 34%;
     left: 2%;
     top: 12%;
+    @media(max-width: 480px){ 
+        left: 32%;
+        top: 3%;
+    }
+    @media (min-width: 481px) and (max-width: 1024px) {
+      height: 30%;
+      left: 34%;
+      top: 3%;
+    }
 
 }
 
@@ -73,6 +93,18 @@ ion-content {
     width: 58%;
     left: 40%;
     top: 12%;
+    @media(max-width: 480px){ 
+        height:max-content;
+        width: 91%;
+        left: 5%;
+        top: 22%;
+    }
+  @media (min-width: 481px) and (max-width: 1024px) {
+    height: max-content;
+    width: 91%;
+    left: 5%;
+    top: 33%;
+    }
 
 }
 

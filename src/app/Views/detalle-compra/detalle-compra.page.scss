@@ -26,20 +26,51 @@ p {
     border-radius: 1vh;
     position: relative;
     color: black;
-    height: 85%;
+    height:max-content;
     width: 98%;
     left: 1%;
     top: 12%;
+    padding-top: 5vh;
+
+    @media(max-width: 480px){ 
+        width: 100%;
+        top:3%
+ 
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        width: 100%;
+        top:3%
+
+ }
 
 }
 
 .imagenes {
 
     position: relative;
-    height: 96%;
-    width: 48%;
+    height: 87vh;
+    width: 45%;
     left: 1%;
     top: 2%;
+
+    @media(max-width: 480px){ 
+        width: 40vh;
+        height: 40vh;
+        left: 3%;
+        margin-bottom: 4vh; 
+    
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        width: 40vh;
+        height: 40vh;
+        margin-bottom: 4vh; 
+        left: 3%;
+
+ }
 
 }
 
@@ -48,6 +79,14 @@ p {
     object-fit: cover;
     width: 100%;
     height: 80%;
+    @media(max-width: 480px){ 
+        width: 95%;
+  
+    }
+    @media(min-width: 481px) and (max-width: 1024px){ 
+        width: 85%;
+  
+    }
 
 }
 
@@ -61,6 +100,10 @@ p {
     display: flex;
     height: 19%;
     top: 1%;
+    @media(min-width: 481px) and (max-width: 1024px){ 
+        top: 3%;
+  
+    }
 
 }
 
@@ -76,9 +119,22 @@ p {
 
     position: relative;
     height: 96%;
-    bottom: 94%;
     width: 48%;
     left: 51%;
+    bottom:70vh;
+    @media(max-width: 480px){ 
+      bottom: -3%;
+      left: 6%;
+      width: 100%;
+      top: 6%;
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+      bottom: -3%;
+      left: 6%;
+      width: 100%;
+      top: 6%;
+ }
 
 }
 
@@ -86,19 +142,35 @@ p {
 
     font-weight: bold;
     font-size: 5vh;
+    @media(max-width: 480px){ 
+        font-size: 3.2vh;
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 4vh;
+ }
 
 }
 
 #precio {
 
     font-size: 4vh;
-
+   
 }
 
 #tituloDescripcion {
 
     font-weight: bold;
     font-size: 5vh;
+    @media(max-width: 480px){ 
+        font-size: 3vh;
+        margin-top: 1vh;
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -113,6 +185,14 @@ p {
 #descripcion {
 
     font-size: 3vh;
+    @media(max-width: 480px){ 
+        font-size: 1.4vh;
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 2vh;
+ }
     
 }
 
@@ -123,6 +203,16 @@ p {
     height: 20%;
     width: 30%;
     top: 2%;
+    @media(max-width: 480px){ 
+        font-size: 3vh;
+        height: 15%;
+        margin-top: 1vh;
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        
+ }
 
 }
 
@@ -145,5 +235,16 @@ p {
     height: 10%;
     width: 98%;
     top: 4%;
+    @media(max-width: 480px){ 
+        width: 70%;
+        margin-top:1vh;
+  
+    }
+ 
+    @media (min-width: 481px) and (max-width: 1024px) {
+        width: 60%;
+        margin-top:1vh;
+
+ }
 
 }

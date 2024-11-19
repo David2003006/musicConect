@@ -43,13 +43,14 @@
                 <div class="seccion">
 
                   <p class="tituloSeccion">NOMBRE SECCION</p>
-                  <ion-icon name="caret-down" id="iconoDown"></ion-icon>
+                  <ion-icon name="caret-down" id="iconoDown"(click)="toggleVisibility(0)"
+                  [class.expanded]="visibleSections[0]"></ion-icon>
 
                 </div>
               </th>
             </tr>
             <tr>
-              <td>
+              <td *ngIf="visibleSections[0]" [@fadeInOut]>
                 <video src="rutaVideo" controls></video>
               </td>
             </tr>
@@ -58,13 +59,14 @@
                 <div class="seccion">
 
                   <p class="tituloSeccion">NOMBRE SECCION</p>
-                  <ion-icon name="caret-down" id="iconoDown"></ion-icon>
+                  <ion-icon name="caret-down" id="iconoDown" (click)="toggleVisibility(1)"
+                  [class.expanded]="visibleSections[1]"></ion-icon>
 
                 </div>
               </th>
             </tr>
             <tr>
-              <td>
+              <td *ngIf="visibleSections[1]" [@fadeInOut]>
                 <video src="rutaVideo" controls></video>
               </td>
             </tr>
@@ -73,13 +75,14 @@
                 <div class="seccion">
 
                   <p class="tituloSeccion">NOMBRE SECCION</p>
-                  <ion-icon name="caret-down" id="iconoDown"></ion-icon>
+                  <ion-icon name="caret-down" id="iconoDown" (click)="toggleVisibility(2)"
+                  [class.expanded]="visibleSections[2]"></ion-icon>
 
                 </div>
               </th>
             </tr>
             <tr>
-              <td>
+              <td *ngIf="visibleSections[2]" [@fadeInOut]>
                 <video src="rutaVideo" controls></video>
               </td>
             </tr>
@@ -88,13 +91,14 @@
                 <div class="seccion">
 
                   <p class="tituloSeccion">NOMBRE SECCION</p>
-                  <ion-icon name="caret-down" id="iconoDown"></ion-icon>
+                  <ion-icon name="caret-down" id="iconoDown" (click)="toggleVisibility(3)"
+                  [class.expanded]="visibleSections[3]"></ion-icon>
 
                 </div>
               </th>
             </tr>
             <tr>
-              <td>
+              <td *ngIf="visibleSections[3]" [@fadeInOut]>
                 <video src="rutaVideo" controls></video>
               </td>
             </tr>

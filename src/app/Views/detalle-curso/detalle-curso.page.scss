@@ -76,8 +76,16 @@ p {
     display: flex;
     height: 100%;
     width: 60%;
+    @media(max-width: 480px){ 
+        width: 45%;
+       }
+       @media (min-width: 481px) and (max-width: 1024px) {
+         width: 45%;
+   
+      }
 
 }
+
 
 #titulo {
 
@@ -118,6 +126,15 @@ p {
     font-size: 4vh;
     width: 99%;
     top: 5%;
+       @media(max-width: 480px){ 
+        font-size: 2.8vh;
+        margin-top: 3%;
+       }
+       @media (min-width: 481px) and (max-width: 1024px) {
+        font-size: 2.8vh;
+        margin-top: 3%;
+
+      }
 
 }
 
