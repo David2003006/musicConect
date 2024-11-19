@@ -5,6 +5,7 @@ export interface Menu {
 }
 
 export interface Producto{
+    TipoRenta: string;
     CategoriaID: string,
     Nombre : string,
     Precio: number,
@@ -29,7 +30,7 @@ export interface Carrito{
     Tipo : string ,
     Total: number,
     imagen: string,
-    //Plazo: string
+    Plazo: string
 }
 
 export interface Curso{

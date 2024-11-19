@@ -19,7 +19,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     IonContent,
-    IonicModule ,
+    //IonicModule ,
     HeaderComponent,
     IonInput,
     IonSelect, IonSelectOption,

@@ -11,6 +11,7 @@ import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.se
 import { Categoria, Producto } from 'src/app/Models/Interfaces';
 import { map, mergeMap, Observable, switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { FiltrosService } from 'src/app/Services/filtros.service';
 
 @Component({
   selector: 'app-renta',
@@ -35,76 +36,67 @@ import { FormsModule } from '@angular/forms';
 export class CompraPage implements OnInit {
   productos: Producto[] = [];
   productosEnCarrito: any [] = [];
+  categoriaSeleccionada: string = 'Todos'; // Asegúrate de que esta variable esté definida
+  categoriaIdSeleccionada: string | undefined = undefined; 
+  textoBusqueda: string = '';
 
-  categoriaSeleccionada: string = 'Todos';
-  busqueda: string = '';
-  categorias: { [id: string]: string } = {};  // Mapeo de CategoriaID a Nombre
-  productosFiltrados: Producto[] = [];
-
-  constructor(private eRef: ElementRef, private navCtrl: NavController,
-     private fire: FirestoreDatabaseService,
-     private cdRef: ChangeDetectorRef) { 
+  constructor(private eRef: ElementRef, private navCtrl: NavController, 
+    private fire: FirestoreDatabaseService, private filtrosService: FiltrosService) { 
     addIcons({ cart });
   }
 
   ngOnInit() {
-    this.obtenerCategorias();
+    this.obtenerProductos();
     this.productosEnCarrito = JSON.parse(localStorage.getItem('carrito') || '[]');
   }
 
-  obtenerCategorias() {
-    this.fire.getCollectionChanges<Categoria>('Categoria').pipe(
-      map((categoriaList) => {
-        categoriaList.forEach((categoria) => {
-          this.categorias[categoria.CategoriaID] = categoria.Nombre; // Asegúrate de que CategoriaID es correcto
-        });
-      }),
-      switchMap(() => this.obtenerProductos()) // Llamada a obtenerProductos que retorna un Observable
-    ).subscribe((productosActualizados) => {
-      this.productos = productosActualizados;
-      this.filtrarProductos(); // Aplicamos el filtro después de obtener los productos
-    });
-  }
-
-  obtenerProductos(): Observable<Producto[]> {
-    return this.fire.getCollectionChanges<Producto>('Producto').pipe(
+  obtenerProductos() {
+    this.fire.getCollectionChanges<Producto>('Producto').pipe(
       map((productos) => 
         productos.filter(producto => producto.Compra === true) // Filtrar productos donde Compra es true
       )
-    );
+    ).subscribe((productosActualizados) => {
+      this.productos = productosActualizados;
+      console.log("Productos obtenidos:", this.productos);
+      this.filtrarProductos(); 
+    });
   }
 
+  obtenerIdsFiltros() {
+    console.log("Categoria seleccionada: ", this.categoriaSeleccionada);
+
+    // Si la categoría no es "Todos", obtenemos el ID de la categoría
+    if (this.categoriaSeleccionada !== 'Todos') {
+      this.filtrosService.getCategoriaIdByName(this.categoriaSeleccionada).subscribe(id => {
+        this.categoriaIdSeleccionada = id;
+        console.log("ID de la categoría seleccionada: ", this.categoriaIdSeleccionada);
+        this.filtrarProductos(); // Filtrar productos según la categoría seleccionada
+      });
+    } else {
+      this.categoriaIdSeleccionada = "Todos"; // Si es "Todos", mostramos todos los productos
+      this.obtenerProductos(); // Cargar todos los productos
+    }
+  }
+
+  // Función para filtrar los productos según la categoría seleccionada
   filtrarProductos() {
-    console.log("Categoría seleccionada:", this.categoriaSeleccionada);
-    console.log("Lista de categorías:", this.categorias);
-    
-    this.productosFiltrados = this.productos;
-
-    // Obtener el ID de la categoría seleccionada usando su nombre
-    const categoriaIDSeleccionada = Object.entries(this.categorias).find(
-      ([id, nombre]) => nombre === this.categoriaSeleccionada
-    )?.[0]; // Esto obtiene el ID de la categoría seleccionada si existe
-
-    // Filtrar por Categoría si se ha seleccionado una y el ID es válido
-    if (this.categoriaSeleccionada !== 'Todos' && categoriaIDSeleccionada) {
-        this.productosFiltrados = this.productosFiltrados.filter(
-            producto => producto.CategoriaID === categoriaIDSeleccionada
-        );
+    if (this.categoriaIdSeleccionada) {
+      this.productos = this.productos.filter(producto => producto.CategoriaID === this.categoriaIdSeleccionada);
     }
 
-    // Filtrar por Búsqueda
-    if (this.busqueda) {
-        this.productosFiltrados = this.productosFiltrados.filter(producto => 
-            producto.Nombre.toLowerCase().includes(this.busqueda.toLowerCase())
-        );
+    if (this.textoBusqueda.trim() !== '') {
+      // Filtrar por el texto de búsqueda (en este caso por el nombre del producto)
+      this.productos = this.productos.filter(producto => 
+        producto.Nombre.toLowerCase().includes(this.textoBusqueda.toLowerCase())
+      );
     }
 
-    console.log("Productos después de filtrar:", this.productosFiltrados);
-}
-  
+  }
 
-  //idProducto: string = "EsteEsElIDDelProducto";
+
+  idProducto: string = "EsteEsElIDDelProducto";
   estadoCarrito = false;
+
   cambiarEstadoCarrito() {
     this.estadoCarrito = !this.estadoCarrito;
   }

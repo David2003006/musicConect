@@ -1,15 +1,14 @@
-import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
-import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
-import { CommonModule } from '@angular/common';
-import { HeaderComponent } from '../header/header.component';
-import { addIcons } from 'ionicons';
-import { cart } from 'ionicons/icons';
-import { CarritoComponent } from '../carrito/carrito.component';
-import { NavController } from '@ionic/angular';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
-import { Categoria, Producto, Renta } from 'src/app/Models/Interfaces';
-import { collection, getDocs } from '@angular/fire/firestore';
-import { map, Observable, switchMap } from 'rxjs';
+import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
+import { Producto } from 'src/app/Models/Interfaces';// Importa la interfaz del producto
+import { FiltrosService } from 'src/app/Services/filtros.service';
+import { cart, contractOutline } from 'ionicons/icons';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { NavController } from '@ionic/angular';
+import { HeaderComponent } from '../header/header.component';
+import { CarritoComponent } from '../carrito/carrito.component';
 import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -21,6 +20,7 @@ import { ChangeDetectorRef } from '@angular/core';
   imports: [
     CommonModule,
     IonContent,
+    //IonicModule,
     HeaderComponent,
     IonInput,
     IonSelect, IonSelectOption,
@@ -34,104 +34,93 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 
 export class RentaPage implements OnInit {
-  productos: Producto[] = [];
-  categoriaSeleccionada = 'Todos';
-  tipoRentaSeleccionado = 'Todos';
-  busquedaTermino = ''; // Para almacenar el término de búsqueda
-  categorias: { [id: string]: string } = {}; // Mapeo de CategoriaID a Nombre
-  productosFiltrados: Producto[] = [];
 
-  constructor(private eRef: ElementRef, private navCtrl: NavController, 
+  productos: Producto[] = [];  // Lista de productos originales
+  productosFiltrados: Producto[] = []; // Lista de productos filtrados
+  busqueda: string = '';  // Filtro de búsqueda
+  categoriaSeleccionada: string = 'Todos'; // Filtro de categoría
+  tipoRentaSeleccionado: string = 'Todos'; // Filtro de tipo renta
+
+  categoriaIdSeleccionada: string | undefined = undefined; // ID de categoría seleccionada
+  tipoRentaIdSeleccionado: string | undefined = undefined; // ID de tipo renta seleccionado
+
+
+  constructor(
+    private filtrosService: FiltrosService,
     private fire: FirestoreDatabaseService,
-    private cdRef: ChangeDetectorRef) {
-    addIcons({ cart });
-  }
+    private eRef: ElementRef, 
+    private  navCtrl: NavController) {}
 
   ngOnInit() {
-    this.obtenerCategorias();
+    // Obtener los productos
+    this.obtenerProductos();
+    // Obtener los ids de las categorías y tipos de renta al inicio
+    this.obtenerIdsFiltros()
   }
 
-  obtenerCategorias() {
-    this.fire.getCollectionChanges<Categoria>('Categoria').pipe(
-      map((categoriaList) => {
-        categoriaList.forEach((categoria) => {
-          this.categorias[categoria.CategoriaID] = categoria.Nombre; // Asegúrate de que CategoriaID es correcto
-        });
-      }),
-      switchMap(() => this.obtenerProductos()) // Llamada a obtenerProductos que retorna un Observable
-    ).subscribe((productosActualizados) => {
-      this.productos = productosActualizados;
-      this.filtrarProductos(); // Aplicamos el filtro después de obtener los productos
+  obtenerIdsFiltros() {
+    console.log("Tipo renta seleccionado:", this.tipoRentaSeleccionado);
+  
+    // Obtener el id de la categoría seleccionada
+    if (this.categoriaSeleccionada !== 'Todos') {
+      this.filtrosService.getCategoriaIdByName(this.categoriaSeleccionada).subscribe(id => {
+        this.categoriaIdSeleccionada = id;
+        this.filtrarProductos(); // Volver a filtrar con el nuevo id de categoría
+      });
+    }
+  
+    // Obtener el id del tipo de renta seleccionado
+    if (this.tipoRentaSeleccionado !== 'Todos') {
+      if(this.tipoRentaSeleccionado === 'Semanal'){
+        this.tipoRentaIdSeleccionado = 'S'
+        this.filtrarProductos()
+      }else{
+        if(this.tipoRentaSeleccionado === 'Mensual'){
+          this.tipoRentaIdSeleccionado = 'M'
+          this.filtrarProductos()
+        }else{
+          this.tipoRentaIdSeleccionado = 'A'
+          this.filtrarProductos()
+        }
+      }
+    }
+  }
+  
+  obtenerProductos() {
+    console.log("Obteniendo productos desde la base de datos...");
+    this.fire.getCollectionChanges<Producto>('Producto').subscribe((productos: Producto[]) => {
+      this.productos = productos;
+      this.filtrarProductos(); // Llamar a filtrarProductos para mostrar todos los productos
+    }, error => {
+      console.error("Error al obtener productos:", error);
     });
   }
+  
 
-  obtenerProductos(): Observable<Producto[]> {
-    return this.fire.getCollectionChanges<Renta>('TipoRenta').pipe(
-      map((tipoRentaList) => {
-        const tipoRentaMap = new Map<string, string>();
-        tipoRentaList.forEach((tipoRenta) => {
-          if (tipoRenta.Nombre === 'Semanal') {
-            tipoRentaMap.set(tipoRenta.RentaID, 'S');
-          } else if (tipoRenta.Nombre === 'Anual') {
-            tipoRentaMap.set(tipoRenta.RentaID, 'A');
-          } else if (tipoRenta.Nombre === 'Mensual') {
-            tipoRentaMap.set(tipoRenta.RentaID, 'M');
-          }
-        });
-        return tipoRentaMap;
-      }),
-      switchMap((tipoRentaMap) =>
-        this.fire.getCollectionChanges<Producto>('Producto').pipe(
-          map((productos) =>
-            productos.map((producto) => {
-              const rentaSimbolo = tipoRentaMap.get(producto.RentaID);
-              return {
-                ...producto,
-                RentaID: rentaSimbolo ? rentaSimbolo : producto.RentaID,
-              };
-            })
-          )
-        )
-      )
-    );
-  }
-
+  // Función para filtrar los productos
   filtrarProductos() {
-    console.log("Categoría seleccionada:", this.categoriaSeleccionada);
-    console.log("Lista de categorías:", this.categorias);
-    
-    // Inicializamos los productos filtrados con todos los productos
-    this.productosFiltrados = this.productos;
-  
-    // Obtener el ID de la categoría seleccionada usando su nombre
-    const categoriaIDSeleccionada = Object.entries(this.categorias).find(
-      ([id, nombre]) => nombre === this.categoriaSeleccionada
-    )?.[0]; // Esto obtiene el ID de la categoría seleccionada si existe
-  
-    // Filtrar por Categoría si se ha seleccionado una y el ID es válido
-    if (this.categoriaSeleccionada !== 'Todos' && categoriaIDSeleccionada) {
-      this.productosFiltrados = this.productosFiltrados.filter(
-        producto => producto.CategoriaID === categoriaIDSeleccionada
-      );
-    }
-  
-    // Filtrar por Búsqueda
-    if (this.busquedaTermino) {
-      this.productosFiltrados = this.productosFiltrados.filter(producto => 
-        producto.Nombre.toLowerCase().includes(this.busquedaTermino.toLowerCase())
-      );
-    }
-  
-    // Filtrar por Tipo de Renta
-    if (this.tipoRentaSeleccionado !== 'Todos') {
-      this.productosFiltrados = this.productosFiltrados.filter(
-        producto => producto.RentaID === this.tipoRentaSeleccionado
-      );
-    }
-  
-    console.log("Productos después de filtrar:", this.productosFiltrados);
-    
-    this.cdRef.markForCheck(); // Forza la detección de cambios en la vista
+    this.productosFiltrados = this.productos.filter((producto) => {
+      let cumpleCategoria = true;
+      let cumpleTipoRenta = true;
+      let cumpleBusqueda = true;
+
+      // Filtrar por categoría (por id)
+      if (this.categoriaIdSeleccionada && this.categoriaIdSeleccionada !== 'Todos') {
+        cumpleCategoria = producto.CategoriaID === this.categoriaIdSeleccionada;
+      }
+
+      // Filtrar por tipo renta (por id)
+      if (this.tipoRentaIdSeleccionado && this.tipoRentaIdSeleccionado !== 'Todos') {
+        cumpleTipoRenta = producto.RentaID === this.tipoRentaIdSeleccionado;
+      }
+
+      // Filtrar por búsqueda
+      if (this.busqueda) {
+        cumpleBusqueda = producto.Nombre.toLowerCase().includes(this.busqueda.toLowerCase());
+      }
+
+      return cumpleCategoria && cumpleTipoRenta && cumpleBusqueda;
+    });
   }
 
   estadoCarrito = false;
@@ -147,7 +136,10 @@ export class RentaPage implements OnInit {
     }
   }
 
+
   irDetalleRenta(id: string) {
     this.navCtrl.navigateForward("renta/" + id, { animated: false });
   }
 }
+
+

@@ -19,6 +19,7 @@
           <p id="tipoCarrito">{{ producto.Tipo }}</p>
           <!-- Mostrar cantidad o plazo dependiendo del tipo de producto -->
           <p *ngIf="producto.Tipo === 'C'" id="cantidadCompra">x{{ producto.Total }}</p>
+          <p *ngIf="producto.Tipo === 'R'" id="tiempoRenta">{{ producto.Plazo }}</p>
         </div>
       </div>
     </div>
