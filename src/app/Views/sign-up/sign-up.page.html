@@ -1,47 +1,37 @@
 <ion-content>
-
-  <img src="https://ionicframework.com/docs/img/demos/avatar.svg" id="logo"/>
+  <img src="https://ionicframework.com/docs/img/demos/avatar.svg" id="logo" />
 
   <ion-card class="signin">
-
     <div class="contentSigin">
-
       <p id="titulo">Crear Cuenta</p>
 
       <div class="inputsDatos">
-
         <div id="nombreUsuario" class="input">
           <label for="nombreUsuario" class="form-label">Nombre Usuario</label>
-          <input type="text" class="form-control" placeholder="Nombre Usuario" aria-label="Nombre Usuario" aria-describedby="basic-addon1">
+          <input type="text" class="form-control" placeholder="Nombre Usuario" aria-label="Nombre Usuario" aria-describedby="basic-addon1" [(ngModel)]="nombreUsuario">
         </div>
 
         <div id="correo" class="input">
           <label for="correo" class="form-label">Correo Electronico</label>
-          <input type="text" class="form-control" placeholder="Correo Electronico" aria-label="Correo Electronico" aria-describedby="basic-addon1">
+          <input type="text" class="form-control" placeholder="Correo Electronico" aria-label="Correo Electronico" aria-describedby="basic-addon1" [(ngModel)]="correo">
         </div>
-
       </div>
 
       <div class="inputsContraseñas">
-
         <div id="contraseña" class="input">
           <label for="contraseña" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
+          <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" [(ngModel)]="contrasena">
         </div>
 
         <div id="repetirContraseña" class="input">
           <label for="repetirContraseña" class="form-label">Repetir Contraseña</label>
-          <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
+          <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" [(ngModel)]="repetirContrasena">
         </div>
-
       </div>
 
-      <button type="button" class="btn" id="crearCuenta" (click)="irRuta('inicio')">Ingresar</button>
+      <button type="button" class="btn" id="crearCuenta" (click)="crearUsuario()">Crear Cuenta</button>
 
       <p id="conCuenta">¿Ya tienes una cuenta? <span id="iniciarSesion" (click)="irRuta('log-in')">Inicia sesion</span></p>
-  
     </div>
-    
   </ion-card>
-
 </ion-content>

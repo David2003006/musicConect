@@ -10,20 +10,20 @@
 
       <div id="nombreUsuario" class="input">
         <label for="nombreUsuario" class="form-label">Nombre Usuario</label>
-        <input type="text" class="form-control" placeholder="Nombre Usuario" aria-label="Nombre Usuario" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" placeholder="Nombre Usuario" aria-label="Nombre Usuario" aria-describedby="basic-addon1" [(ngModel)]="nombreUsuario">
       </div>
   
       <div id="contraseña" class="input">
         <label for="contraseña" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1">
+        <input type="password" class="form-control" placeholder="Contraseña" aria-label="Contraseña" aria-describedby="basic-addon1" [(ngModel)]="contrasena">
       </div>
 
-      <button type="button" class="btn" id="iniciarSesion" (click)="irRuta('inicio')">Inicar Sesion</button>
+      <button type="button" class="btn" id="iniciarSesion" (click)="iniciarSesion()">Iniciar Sesion</button>
   
       <p id="contraOlvidada">¿Olvidaste la contraseña?</p>
   
       <p id="sinCuenta">¿No tienes cuenta? <span id="creaCuenta" (click)="irRuta('sign-up')">Crea una</span></p>
-  
+
     </div>
     
   </ion-card>

@@ -1,5 +1,4 @@
 export interface Menu {
-
     id: number;
     titulo: string;
 
@@ -53,4 +52,12 @@ export interface Video{
 export interface Categoria{
     CategoriaID: string,
     Nombre: string
+}
+
+export interface Usuario{
+    UsuarioID : string,
+    Nombre: string,
+    Contrasena: string,
+    Correo: string,
+    Rol: string
 }
