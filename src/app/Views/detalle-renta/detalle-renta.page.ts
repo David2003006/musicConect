@@ -5,6 +5,7 @@ import { Producto } from 'src/app/Models/Interfaces';
 import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-detalle-renta',
@@ -13,15 +14,19 @@ import { NavController } from '@ionic/angular';
   standalone: true,
   imports: [
     IonContent,
-    HeaderComponent,    
+    HeaderComponent,
+    FormsModule    
   ]
 })
 export class DetalleRentaPage implements OnInit {
 
   @Input() productoId!: string; // Recibe el ID del producto
   producto?: Producto;
+  cantidad: number = 0;
   tipoRenta: string = "";
+  renta: boolean = true;
   plazo: number = 0;
+  esRenta: boolean = true;
 
   constructor(private fireStoreServices: FirestoreDatabaseService, 
     private route: ActivatedRoute,
@@ -42,24 +47,25 @@ export class DetalleRentaPage implements OnInit {
     });
   }
 
-  agregarAlCarrito(){
-    const tipoRentaSeleccionado = (document.querySelector('#tipoRenta select') as HTMLSelectElement).value;
-    const plazoIngresado = parseInt((document.querySelector('#plazo input') as HTMLInputElement).value, 10);
+  agregarAlCarrito() {
+    if (this.producto) {
+      const queryParams: any = {
+        idProducto: this.producto.ProductoID,
+        cantidad: this.cantidad
+      };
+      if (this.esRenta) {
+        queryParams.plazo = this.plazo;
+        queryParams.tipo = this.tipoRenta;
+        queryParams.renta = this.renta;
+        queryParams.cantidad = this.plazo
+      }
+      console.log('Parámetros enviados al carrito:', queryParams)
+      // Redirigir al carrito con los parámetros configurados
+      this.navCtrl.navigateForward(`/lista-carrito`, {
+        queryParams: queryParams
+      });
   
-    // Validación para asegurar que los datos sean válidos
-    if (!plazoIngresado || plazoIngresado <= 0) {
-      alert('Por favor ingrese un plazo válido.');
-      return;
-  }
-  this.navCtrl.navigateForward(`/lista-carrito`, {
-    queryParams: {
-      idProducto: this.producto?.ProductoID,
-      tipoRenta: tipoRentaSeleccionado,
-      plazo: plazoIngresado
-    }
-  });
-    //console.log(this.producto?.ProductoID)
-    //console.log(tipoRentaSeleccionado)
-    //console.log(plazoIngresado)
-  }
+  
+}
+}
 }

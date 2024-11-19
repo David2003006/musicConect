@@ -17,6 +17,7 @@ import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.se
   imports: [
     CommonModule,
     IonContent,
+    //IonicModule ,
     HeaderComponent,
     IonInput,
     IonSelect, IonSelectOption,

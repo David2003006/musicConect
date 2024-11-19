@@ -22,8 +22,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class DetalleCompraPage implements OnInit {
   @Input() productoId!: string; // Recibe el ID del producto
+  plazo: number = 0;
+  tipo: string = '';
   producto?: Producto;
   cantidad: number = 0;
+  esRenta: boolean = false ;
 
   constructor(
     private fireStoreServices: FirestoreDatabaseService, 
@@ -47,13 +50,21 @@ export class DetalleCompraPage implements OnInit {
 
   agregarAlCarrito() {
     if (this.producto) {
+      const queryParams: any = {
+        idProducto: this.producto.ProductoID,
+        cantidad: this.cantidad
+      };
+  
+      // Verificar si es un producto de renta y agregar parámetros adicionales
+      if (this.esRenta) {
+        queryParams.plazo = this.plazo;
+        queryParams.tipo = this.tipo;
+      }
+
+      console.log('Parámetros enviados al carrito:', queryParams);
+      // Redirigir al carrito con los parámetros configurados
       this.navCtrl.navigateForward(`/lista-carrito`, {
-        queryParams: {
-          idProducto: this.producto.ProductoID,
-          nombreProducto: this.producto.Nombre,
-          precio: this.producto.Precio,
-          cantidad : this.cantidad
-        }
+        queryParams: queryParams
       });
     }
   }
