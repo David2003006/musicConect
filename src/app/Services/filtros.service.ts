@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FirestoreDatabaseService } from './firestore-database.services';
+import { FirestoreDatabaseService } from './firestore-database.service';
 import { map, Observable } from 'rxjs';
 import { contractOutline } from 'ionicons/icons';
 

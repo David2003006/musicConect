@@ -4,7 +4,7 @@ import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { close } from 'ionicons/icons';
 import { Video } from 'src/app/Models/Interfaces';
-import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

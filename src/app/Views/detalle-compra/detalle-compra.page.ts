@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from '../header/header.component';
 import { Producto } from 'src/app/Models/Interfaces';
-import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -20,7 +20,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule  
   ]
 })
-
 export class DetalleCompraPage implements OnInit {
   @Input() productoId!: string; // Recibe el ID del producto
   plazo: number = 0;

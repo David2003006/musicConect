@@ -3,7 +3,6 @@ export interface Menu {
     titulo: string;
 
 }
-
 export interface Producto{
     TipoRenta: string;
     CategoriaID: string,
@@ -16,9 +15,7 @@ export interface Producto{
     RentaID: string,
     imagen: string
 }
-
 export interface Renta{
-
     Nombre: string,
     RentaID: string
 }
@@ -35,6 +32,7 @@ export interface Carrito{
 
 export interface Curso{
     CursoID: string,
+    CategoriaID: string;
     Nombre: string,
     Precio: string,
     UsuarioID: string,

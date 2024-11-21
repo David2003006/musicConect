@@ -4,7 +4,7 @@ import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { contractOutline, enter, trash } from 'ionicons/icons';
 import { ActivatedRoute } from '@angular/router';
-import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
 import { Carrito, Producto } from 'src/app/Models/Interfaces';
 import { CarritoService } from 'src/app/Services/carrito.service';
 import { CommonModule } from '@angular/common';
@@ -43,6 +43,7 @@ export class ListaCarritoPage implements OnInit {
       const plazo = params['plazo'];
       const tipo = params['tipo'];
       const renta: boolean = params['renta'] === 'true';  // Convierte a booleano
+     
 
       if (cantidad <= 0 || isNaN(cantidad)) {
         cantidad  = 1;  // Asigna 1 si la cantidad es 0 o no es un número válido
@@ -69,7 +70,6 @@ export class ListaCarritoPage implements OnInit {
         });
       }
     });
-  
     // Cargar los productos del carrito desde el servicio
     this.cargarProductos();
   }
@@ -79,6 +79,7 @@ export class ListaCarritoPage implements OnInit {
     this.productosEnCarrito = this.carritoService.getProductosCarrito();
     this.totalCarrito = this.carritoService.calcularTotal();
   }
+
 
   agregarAlCarrito(producto: Producto, cantidad: number = 1, plazo?: string, tipo?: string, renta?: boolean) {
     // Si es renta, el precio total podría ser diferente o estar vacío
@@ -102,10 +103,10 @@ export class ListaCarritoPage implements OnInit {
     this.carritoService.agregarProducto(productoCarrito);
     this.cargarProductos();  // Recargar productos y actualizar el total
   }
-
   eliminarProducto(idProducto: string) {
     // Eliminar el producto del carrito usando el servicio
     this.carritoService.eliminarProducto(idProducto);
     this.cargarProductos();  // Recargar productos y actualizar el total
   }
 }
+

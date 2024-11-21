@@ -1,15 +1,15 @@
+
 import { Component, OnInit, HostListener, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
 import { addIcons } from 'ionicons';
 import { cart } from 'ionicons/icons';
 import { CarritoComponent } from '../carrito/carrito.component';
 import { NavController } from '@ionic/angular';
-import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
-import { Categoria, Producto } from 'src/app/Models/Interfaces';
-import { map, mergeMap, Observable, switchMap } from 'rxjs';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
+import { Producto } from 'src/app/Models/Interfaces';
+import { map } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { FiltrosService } from 'src/app/Services/filtros.service';
 
@@ -23,12 +23,9 @@ import { FiltrosService } from 'src/app/Services/filtros.service';
     IonContent,
     //IonicModule,
     HeaderComponent,
-    IonInput,
-    IonSelect, IonSelectOption,
-    IonCard,
+
     IonIcon,
     CarritoComponent,
-    IonPopover, 
     CommonModule,
     FormsModule
   ]
@@ -62,6 +59,7 @@ export class CompraPage implements OnInit {
     });
   }
 
+
   obtenerIdsFiltros() {
     console.log("Categoria seleccionada: ", this.categoriaSeleccionada);
 
@@ -79,7 +77,7 @@ export class CompraPage implements OnInit {
   }
 
   // Función para filtrar los productos según la categoría seleccionada
-  filtrarProductos() {
+ filtrarProductos() {
     if (this.categoriaIdSeleccionada) {
       this.productos = this.productos.filter(producto => producto.CategoriaID === this.categoriaIdSeleccionada);
     }
@@ -92,7 +90,6 @@ export class CompraPage implements OnInit {
     }
 
   }
-
 
   idProducto: string = "EsteEsElIDDelProducto";
   estadoCarrito = false;

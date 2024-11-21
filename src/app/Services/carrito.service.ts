@@ -48,3 +48,4 @@ export class CarritoService {
     return this.carrito.reduce((total, producto) => total + producto.Total, 0);
   }
 }
+

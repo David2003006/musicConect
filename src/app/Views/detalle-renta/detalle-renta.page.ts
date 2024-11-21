@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IonContent } from '@ionic/angular/standalone';
 import { HeaderComponent } from '../header/header.component';
 import { Producto } from 'src/app/Models/Interfaces';
-import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
@@ -53,8 +53,6 @@ export class DetalleRentaPage implements OnInit {
         idProducto: this.producto.ProductoID,
         cantidad: this.cantidad
       };
-  
-      // Verificar si es un producto de renta y agregar parámetros adicionales
       if (this.esRenta) {
         queryParams.plazo = this.plazo;
         queryParams.tipo = this.tipoRenta;
@@ -66,6 +64,8 @@ export class DetalleRentaPage implements OnInit {
       this.navCtrl.navigateForward(`/lista-carrito`, {
         queryParams: queryParams
       });
-    }
-  }
+  
+  
+}
+}
 }

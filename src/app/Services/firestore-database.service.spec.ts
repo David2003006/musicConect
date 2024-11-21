@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FirestoreDatabaseService } from './firestore-database.services';
+import { FirestoreDatabaseService } from './firestore-database.service';
 
-describe('FirestoreDatabaseServicesService', () => {
+describe('FirestoreDatabaseService', () => {
   let service: FirestoreDatabaseService;
 
   beforeEach(() => {

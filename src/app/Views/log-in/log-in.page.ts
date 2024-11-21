@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonContent, IonCard, IonButton, IonInput } from '@ionic/angular/standalone';
 import { NavController } from '@ionic/angular';
-import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

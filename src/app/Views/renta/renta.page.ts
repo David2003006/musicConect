@@ -1,15 +1,17 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.services';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { IonContent, IonInput, IonSelect, IonSelectOption, IonCard, IonIcon, IonPopover } from '@ionic/angular/standalone';
-import { Producto } from 'src/app/Models/Interfaces';// Importa la interfaz del producto
-import { FiltrosService } from 'src/app/Services/filtros.service';
-import { cart, contractOutline } from 'ionicons/icons';
-import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { NavController } from '@ionic/angular';
 import { HeaderComponent } from '../header/header.component';
+import { addIcons } from 'ionicons';
+import { cart } from 'ionicons/icons';
 import { CarritoComponent } from '../carrito/carrito.component';
+import { NavController } from '@ionic/angular';
+import { FirestoreDatabaseService } from 'src/app/Services/firestore-database.service';
+import { Producto, Renta } from 'src/app/Models/Interfaces';
+import { collection, getDocs } from '@angular/fire/firestore';
+import { map, switchMap } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { FiltrosService } from 'src/app/Services/filtros.service';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
@@ -23,7 +25,8 @@ import { ChangeDetectorRef } from '@angular/core';
     //IonicModule,
     HeaderComponent,
     IonInput,
-    IonSelect, IonSelectOption,
+    IonSelect, 
+    IonSelectOption,
     IonCard,
     IonIcon,
     CarritoComponent,
@@ -44,6 +47,7 @@ export class RentaPage implements OnInit {
   categoriaIdSeleccionada: string | undefined = undefined; // ID de categoría seleccionada
   tipoRentaIdSeleccionado: string | undefined = undefined; // ID de tipo renta seleccionado
 
+  
 
   constructor(
     private filtrosService: FiltrosService,
@@ -97,6 +101,7 @@ export class RentaPage implements OnInit {
   }
   
 
+  idProducto: string = "EsteEsElIDDelProducto";
   // Función para filtrar los productos
   filtrarProductos() {
     this.productosFiltrados = this.productos.filter((producto) => {
@@ -132,6 +137,9 @@ export class RentaPage implements OnInit {
   @HostListener('document:click', ['$event'])
   clickOut(event: any) {
     if (!this.eRef.nativeElement.contains(event.target)) {
+
+      this.estadoCarrito = false;
+
       this.estadoCarrito = false;
     }
   }
@@ -141,5 +149,3 @@ export class RentaPage implements OnInit {
     this.navCtrl.navigateForward("renta/" + id, { animated: false });
   }
 }
-
-
